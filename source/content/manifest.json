@@ -10,20 +10,12 @@
   "part_count": 8,
   "article_count": 222,
   "website_article_count": 89,
-  "paragraph_count": 3696,
-  "character_count": 279954,
+  "paragraph_count": 3693,
+  "character_count": 279949,
   "website_assets": [
     {
       "path": "images/childrens-day.jpg",
       "sha256": "be4bc64551deb9a76859ee07b76770bf3120a75d753f742a7008842d61cc88ef"
-    },
-    {
-      "path": "images/google-sheets.png",
-      "sha256": "e44709868d6041ca496af6bca47dfbbd144efe5e6c56944b1239f06f6dfb29b4"
-    },
-    {
-      "path": "images/weibo-5276734135997229-1-2b232b7a4f.jpg",
-      "sha256": "b1e937175b55e9613615bded7ed6b2032a79ec025bf053063e0a5e8561d3e79a"
     }
   ],
   "fonts": {
@@ -1232,12 +1224,12 @@
           "title": "一览众山小",
           "source": "website",
           "source_path": "google-sheets.Rmd",
-          "source_sha256": "fe2fe4e267404f44a5cb9f4d3cde67eb4fd8926ef8f08e4368ba6ea96c02ce28",
+          "source_sha256": "bef0a4856567c5358d60f7d7f5b6105e7aff59bb5ca74649624426e6b3d0430d",
           "weight": 3023,
           "year": "2021年",
           "original_page": 0,
-          "paragraphs": 14,
-          "characters": 1063
+          "paragraphs": 12,
+          "characters": 1059
         },
         {
           "order": 100,
@@ -1337,10 +1329,10 @@
         },
         {
           "order": 108,
-          "title": "《生活不是掷骰子：理性决策的贝叶斯思维》序言",
+          "title": "《生活不是掷骰子》序言",
           "source": "website",
           "source_path": "preface.Rmd",
-          "source_sha256": "668ec29debae997d435bb059c357786ccbf01337edb908acf86cf67f8da309b1",
+          "source_sha256": "9eb1bc261072cda5a8c09a84340d4c39f636ecf0c41cfce4471438cf5ee5791f",
           "weight": 3032,
           "year": "2023年",
           "original_page": 0,
@@ -1436,12 +1428,12 @@
           "title": "波澜不惊",
           "source": "website",
           "source_path": "autoresearch.Rmd",
-          "source_sha256": "00364449fbcc5674534dd18f9cf9edbb8afaa56a42e2c360fd6a987d2b88c5d9",
+          "source_sha256": "5313e81f5a9cc435f2547a7f2409f8ec03ed2f3d135cbb6ee2705b6e2ccdf09e",
           "weight": 3040,
           "year": "2026年",
           "original_page": 0,
-          "paragraphs": 8,
-          "characters": 741
+          "paragraphs": 7,
+          "characters": 740
         },
         {
           "order": 117,

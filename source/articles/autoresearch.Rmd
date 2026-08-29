@@ -20,8 +20,6 @@ Autoresearch 还指明了如何利用 AI 来帮助我们做研究的一个重要
 
 正如 Andrej Kapathy 所说：「This is what post-AGI feels like.」
 
-<div align=center>![](/images/weibo-5276734135997229-1-2b232b7a4f.jpg){ width=70% }</div>
-
 <div align=right>
 2026 年 3 月，多伦多
 </div>

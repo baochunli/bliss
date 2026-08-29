@@ -27,10 +27,6 @@ slug: 好好学习天天向上/一览众山小
 
 用惯了 Google Sheets 还有个好处：下回再给别人发表格，我一定会洋洋得意地发个 Google Sheets 的链接 —— 想要 Excel? 哈哈自己转吧。
 
-<div align=center>![](/images/google-sheets.png){ width=100% }</div>
-
-[原图](/images/google-sheets.png)
-
 [Live Portfolio Tracker 示例](https://docs.google.com/spreadsheets/d/1bzKmkM6HUixKAA48pCFVEQRh645vXejmP3ToPGSdj6o/edit?usp=sharing)
 
 <div align=right>

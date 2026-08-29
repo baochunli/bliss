@@ -58,13 +58,13 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
         self.assertTrue(all(article.year for article in self.website_articles))
         self.assertEqual(
             {
-                "Blurb Paragraph": 1_193,
+                "Blurb Paragraph": 1_192,
                 "Website Question": 69,
                 "Website Quote": 49,
                 "Blurb Paragraph Date": 90,
                 "Blurb Subtitle": 86,
                 "Blurb Footnote": 3,
-                "Website Image": 3,
+                "Website Image": 1,
                 "Website Left": 2,
             },
             Counter(
@@ -115,9 +115,16 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
         for title in two_character_chinese_titles:
             spaced_title = "\u3000".join(title)
             self.assertIn(f"\\BookArticle{{{spaced_title}}}{{{title}}}", tex)
-        self.assertEqual(3, tex.count("\\BookImage{"))
+        self.assertIn(
+            r"\BookArticle{《生活不是掷骰子》序言}{《生活不是掷骰子》序言}",
+            tex,
+        )
+        self.assertNotIn("《生活不是掷骰子：理性决策的贝叶斯思维》序言", tex)
+        self.assertEqual(1, tex.count("\\BookImage{"))
+        self.assertNotIn("images/google-sheets.png", tex)
+        self.assertNotIn("images/weibo-5276734135997229-1-2b232b7a4f.jpg", tex)
         self.assertEqual(4, tex.count("\\footnote{"))
-        self.assertEqual(5, tex.count("\\href{https://baochun.ca/"))
+        self.assertEqual(4, tex.count("\\href{https://baochun.ca/"))
         self.assertEqual(69, tex.count("\\BookQuestion{"))
         self.assertEqual(49, tex.count("\\BookQuote{"))
         self.assertIn(
@@ -189,15 +196,13 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
 
         self.assertEqual(222, manifest["article_count"])
         self.assertEqual(89, manifest["website_article_count"])
-        self.assertEqual(3_696, manifest["paragraph_count"])
-        self.assertEqual(279_954, manifest["character_count"])
+        self.assertEqual(3_693, manifest["paragraph_count"])
+        self.assertEqual(279_949, manifest["character_count"])
         self.assertEqual(89, len(website_sources))
         self.assertTrue(all(article["source_sha256"] for article in website_sources))
         self.assertEqual(
             {
                 "images/childrens-day.jpg",
-                "images/google-sheets.png",
-                "images/weibo-5276734135997229-1-2b232b7a4f.jpg",
             },
             {asset["path"] for asset in manifest["website_assets"]},
         )
