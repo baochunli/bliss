@@ -139,6 +139,18 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
         self.assertEqual(14, tex.count(r"\LatinLeftDoubleQuote{}"))
         self.assertEqual(13, tex.count(r"\LatinRightDoubleQuote{}"))
         self.assertEqual(20, tex.count(r"\LatinEmDash{}"))
+        self.assertEqual(14, tex.count(r"\BookHardBreak{}"))
+        self.assertIn(
+            r"Best regards,\BookHardBreak{}Baochun\BookHardBreak{}",
+            tex,
+        )
+        self.assertNotIn(r"Best regards,\BookLineBreak{}", tex)
+        self.assertEqual(8, tex.count(r"\hspace*{1em}"))
+        self.assertIn(
+            r"\BookLeftParagraph{\hspace*{1em}\hspace*{1em}"
+            r"\textbf{宽广美丽的土地}\BookHardBreak{}",
+            tex,
+        )
         self.assertIn(
             r"from first principles \LatinEmDash{} over 360,000 lines",
             tex,

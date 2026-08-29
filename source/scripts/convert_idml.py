@@ -527,7 +527,7 @@ def parse_markdown_inline(
         _append_span(spans, Span(text[position : match.start()]))
         token = match.group(0)
         if re.fullmatch(r"<br\s*/?>", token, re.IGNORECASE):
-            _append_span(spans, Span("\n"))
+            _append_span(spans, Span("\n", "Markdown Hard Break"))
         elif token.startswith("<sup>"):
             _append_span(spans, Span(token[5:-6], "Markdown Superscript"))
         elif token.startswith("**"):
@@ -980,7 +980,7 @@ def escape_tex(
         elif character in CJK_FALLBACK_CHARACTERS:
             result.append(rf"{{\BlissCJKFallback {character}}}")
         elif character == "\u2003":
-            result.append(r"\hspace{1em}")
+            result.append(r"\hspace*{1em}")
         elif character == "😭":
             result.append(r"\BlissCryingEmoji{}")
         elif character == "\n":
@@ -1019,6 +1019,8 @@ def render_span(
     latin_em_dash_indices: Optional[set[int]] = None,
     suppressed_em_dash_indices: Optional[set[int]] = None,
 ) -> str:
+    if span.character_style == "Markdown Hard Break":
+        return r"\BookHardBreak{}"
     quote_indices = set(latin_quote_indices or ())
     if span.character_style == "Apostrophe":
         quote_indices.update(
@@ -1126,7 +1128,14 @@ def render_paragraph(
     elif paragraph.style in FOOTNOTE_STYLES:
         command = "BookFootnote"
     elif paragraph.style == BODY_STYLE:
-        command = "BookParagraph"
+        command = (
+            "BookLeftParagraph"
+            if any(
+                span.character_style == "Markdown Hard Break"
+                for span in paragraph.spans
+            )
+            else "BookParagraph"
+        )
     else:
         command = "BookPlainParagraph"
     return rf"\{command}{{{content}}}"

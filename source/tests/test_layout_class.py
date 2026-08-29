@@ -51,6 +51,16 @@ class BlissBookClassTests(unittest.TestCase):
             self.class_source,
         )
 
+    def test_markdown_hard_breaks_do_not_stretch_short_lines(self) -> None:
+        self.assertIn(
+            r"\newcommand{\BookHardBreak}{\newline}",
+            self.class_source,
+        )
+        self.assertIn(
+            r"\newcommand{\BookLineBreak}{\linebreak}",
+            self.class_source,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

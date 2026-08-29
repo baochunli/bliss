@@ -100,6 +100,9 @@
 \pagestyle{blissbody}
 
 \newcommand{\BookLineBreak}{\linebreak}
+% Markdown hard breaks are intentional line endings, not requests to stretch
+% short lines across the measure as TeX's \linebreak command does.
+\newcommand{\BookHardBreak}{\newline}
 \newcommand{\BookTab}{\hspace{1em}}
 \newcommand{\LatinApostrophe}{\ltjalchar"2019}
 \newcommand{\LatinLeftDoubleQuote}{\ltjalchar"201C}
