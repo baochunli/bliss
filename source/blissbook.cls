@@ -110,10 +110,19 @@
 \newcommand{\LatinDash}{{\BlissColophonLatin\ltjalchar"2013}}
 \newcommand{\BlissCryingEmoji}{（哭）}
 \newif\ifBlissFootnoteSeries
+\newif\ifBlissAfterSubtitle
 
 \newcommand{\BookParagraph}[1]{%
   \global\BlissFootnoteSeriesfalse
-  \par\BookBodyFont\noindent\hspace{\parindent}#1\par
+  \ifBlissAfterSubtitle
+    \global\BlissAfterSubtitlefalse
+    \begingroup
+      \clubpenalty=0
+      \par\BookBodyFont\noindent\hspace{\parindent}#1\par
+    \endgroup
+  \else
+    \par\BookBodyFont\noindent\hspace{\parindent}#1\par
+  \fi
 }
 \newcommand{\BookPlainParagraph}[1]{\BookParagraph{#1}}
 \newcommand{\BookLeftParagraph}[1]{%
@@ -148,10 +157,13 @@
 }
 \newcommand{\BookSubtitle}[1]{%
   \global\BlissFootnoteSeriesfalse
-  \par\vspace{14bp}\noindent
-  \makebox[\textwidth][c]{%
-    \BlissHeadingFont\fontsize{11bp}{18.7bp}\selectfont #1}%
-  \par\vspace{7bp}
+  \par\vspace{14bp}
+  \begingroup
+    \noindent\hspace{\parindent}%
+    \BlissHeadingFont\fontsize{11bp}{18.7bp}\selectfont #1\par
+  \endgroup
+  \nobreak\vspace{7bp}\nobreak
+  \global\BlissAfterSubtitletrue
 }
 \newcommand{\BookFootnote}[1]{%
   \par
