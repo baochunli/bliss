@@ -22,8 +22,7 @@ book: convert
 
 verify: test book
 	@test -f book.pdf
-	@test "$$(pdfinfo book.pdf | awk '/^Pages:/ { print $$2 }')" -gt "400"
-	@test "$$(($$(pdfinfo book.pdf | awk '/^Pages:/ { print $$2 }') % 2))" = "0"
+	@test "$$(pdfinfo book.pdf | awk '/^Pages:/ { print $$2 }')" -eq "440"
 	@test "$$(pdfinfo book.pdf | awk '/^Page size:/ { print $$3 "x" $$5 }')" = "432x648"
 	@qpdf --check book.pdf >/dev/null
 	@! pdffonts book.pdf | tail -n +3 | rg -q ' no '
