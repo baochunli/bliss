@@ -102,14 +102,33 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
 
     def test_renders_supported_markdown_without_source_markup_leaks(self) -> None:
         tex = render_content_tex(self.book)
+        two_character_chinese_titles = [
+            article.title
+            for article in self.website_articles
+            if len(article.title) == 2
+            and all("\u3400" <= character <= "\u9fff" for character in article.title)
+        ]
 
         self.assertEqual(222, tex.count("\\BookArticle{"))
+        self.assertEqual(27, len(two_character_chinese_titles))
+        for title in two_character_chinese_titles:
+            spaced_title = "\u3000".join(title)
+            self.assertIn(f"\\BookArticle{{{spaced_title}}}{{{title}}}", tex)
         self.assertEqual(3, tex.count("\\BookImage{"))
         self.assertEqual(4, tex.count("\\footnote{"))
         self.assertEqual(5, tex.count("\\href{https://baochun.ca/"))
         self.assertIn("\\BookQuote{", tex)
         self.assertIn("\\BookSubtitle{", tex)
         self.assertIn("\\BlissCJKFallback", tex)
+        self.assertEqual(1_027, tex.count(r"\CJKPunctuationPairGap{}"))
+        self.assertEqual(116, tex.count(r"\LatinApostrophe{}"))
+        self.assertEqual(14, tex.count(r"\LatinLeftDoubleQuote{}"))
+        self.assertEqual(13, tex.count(r"\LatinRightDoubleQuote{}"))
+        self.assertIn(
+            r'\LatinLeftDoubleQuote{}Connecting the Dots,"',
+            tex,
+        )
+        self.assertIn('“小镇做题家”', tex)
         self.assertNotIn("\\href{/", tex)
         self.assertNotIn("\u2003", tex)
         self.assertNotIn("#####", tex)

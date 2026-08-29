@@ -80,13 +80,27 @@ The source contains one crying-face emoji that is unavailable in the packaged
 fonts. The class renders it with an explicit textual fallback rather than
 silently depending on a system emoji font.
 
-Hiragino Sans GB W6 was named by the InDesign document but was not included in
-its package. The class uses the licensed system copy when available and falls
-back to Fandol Hei. SF Pro Display Bold is not used because its license forbids
-this kind of document use; TeX Gyre Heros is the licensed Latin heading
-replacement. See `FONT-NOTES.md`.
-
 The reference PDF has no PDF/X output intent or bleed box. This build likewise
 produces a standard PDF 1.7 file, not a certified PDF/X or tagged-PDF artifact.
 Run the final PDF through the printer's preflight and ICC workflow before a
 commercial press run.
+
+# Font notes
+
+The `fonts/` directory contains local copies of fonts found in the InDesign
+package and used by this LuaLaTeX edition:
+
+- `FZNewShuSong-Z10.ttf` — Chinese body text
+- `MinionPro-Regular.otf` and `MinionPro-Bold.otf` — Latin body text
+- `SF-Pro-Display-Bold.otf` — Latin headings (boldface titles)
+- `AdobeSongStd-Light.otf` — fallback for circled-number glyphs
+
+`FZNewShuSong-Z10S.ttf` is used for the title-page byline, matching its special
+use in the InDesign edition.
+
+Hiragino Sans GB W6 is loaded from the operating system when installed because
+it was referenced by InDesign but not packaged. TeX Live's Fandol Hei is the
+portable fallback.
+
+`SF-Pro-Display-Bold.otf` is copied from the InDesign package and used for
+Latin headings, matching the reference edition's boldface title face.

@@ -45,6 +45,11 @@
 \setCJKmonofont{FZNewShuSong-Z10.ttf}[Path=fonts/]
 \setCJKfamilyfont{blisstitlebyline}{FZNewShuSong-Z10S.ttf}[Path=fonts/]
 \newfontfamily\BlissSymbols{AdobeSongStd-Light.otf}[Path=fonts/]
+\newfontfamily\BlissColophonCJKSymbols{FZNewShuSong-Z10.ttf}[Path=fonts/]
+\newfontfamily\BlissColophonLatin{MinionPro-Regular.otf}[
+  Path=fonts/,
+  RawFeature={-tlig}
+]
 % Minion Pro lacks a few Latin Extended tone-mark glyphs used in pinyin.
 % TeX Gyre Termes keeps those fallbacks at a normal Latin width.
 \newfontfamily\BlissCJKFallback{texgyretermes-regular.otf}
@@ -57,7 +62,9 @@
 }{
   \setCJKfamilyfont{blissheading}{FandolHei-Bold.otf}
 }
-\newfontfamily\BlissHeadingLatin{texgyreheros-bold.otf}
+% SF Pro Display Bold is the Latin title face of the reference edition and is
+% packaged with it. Use the packaged copy so headings match the InDesign book.
+\newfontfamily\BlissHeadingLatin{SF-Pro-Display-Bold.otf}[Path=fonts/]
 \newcommand{\BlissHeadingFont}{%
   \CJKfamily{blissheading}\BlissHeadingLatin
 }
@@ -94,6 +101,13 @@
 
 \newcommand{\BookLineBreak}{\linebreak}
 \newcommand{\BookTab}{\hspace{1em}}
+\newcommand{\LatinApostrophe}{\ltjalchar"2019}
+\newcommand{\LatinLeftDoubleQuote}{\ltjalchar"201C}
+\newcommand{\LatinRightDoubleQuote}{\ltjalchar"201D}
+\newcommand{\CJKPunctuationPairGap}{\kern.5em}
+\newcommand{\TextQuote}{{\BlissColophonLatin\ltjalchar34}}
+\newcommand{\CJKTimes}{{\BlissColophonCJKSymbols\ltjalchar"00D7}}
+\newcommand{\LatinDash}{{\BlissColophonLatin\ltjalchar"2013}}
 \newcommand{\BlissCryingEmoji}{（哭）}
 \newif\ifBlissFootnoteSeries
 
@@ -150,25 +164,34 @@
   \BookBodyFont
 }
 
+\newcommand{\BookColophonRow}[2]{%
+  {\BlissHeadingFont #1}& #2\tabularnewline
+}
+\newcommand{\BookColophonContinuation}[1]{& #1\tabularnewline}
+\newcommand{\BookColophonGap}[1]{\noalign{\vskip5bp}}
+\newcommand{\BookColophonText}[1]{%
+  \multicolumn{2}{@{}l@{}}{#1}\tabularnewline
+}
 \newcommand{\BookColophon}[1]{%
   \hypersetup{pageanchor=false}
   \pagenumbering{gobble}
   \thispagestyle{empty}\null\clearpage
   \thispagestyle{empty}
-  \vspace*{224bp}
-  \noindent\hspace*{11bp}%
-  \makebox[0pt][l]{\begin{minipage}{329bp}
-    \hrule height 0.35bp
-    \vspace{14bp}
+  \vspace*{204.5bp}
+  \noindent\hspace*{9.6bp}%
+  \makebox[0pt][l]{\raisebox{0pt}[0pt][0pt]{\begin{minipage}[t]{333.6bp}
+    \hrule height 0.5bp
+    \vspace{15bp}
     \begingroup
-      \fontsize{9bp}{15.5bp}\selectfont\raggedright
-      \renewcommand{\BookTab}{\hspace{2.7em}}%
-      \renewcommand{\BookLineBreak}{\\}%
-      #1
+      \fontsize{9bp}{15.3bp}\selectfont
+      \hspace*{1.6bp}%
+      \begin{tabular}{@{}l@{\hspace{14bp}}l@{}}
+        #1
+      \end{tabular}
     \endgroup
-    \vspace{4bp}
-    \hrule height 0.35bp
-  \end{minipage}}
+    \vspace{17bp}
+    \hrule height 0.5bp
+  \end{minipage}}}
   \clearpage
 }
 

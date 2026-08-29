@@ -73,6 +73,14 @@ def clean_title(text: str) -> str:
     return " ".join(normalize_controls(text).replace("\u3000", " ").split())
 
 
+def website_display_title(title: str) -> str:
+    if len(title) == 2 and all(
+        "\u3400" <= character <= "\u9fff" for character in title
+    ):
+        return "\u3000".join(title)
+    return title
+
+
 @dataclass(frozen=True)
 class Span:
     text: str
@@ -782,7 +790,7 @@ def extract_website_articles(article_dir: Path) -> List[Article]:
         articles.append(
             Article(
                 title=title,
-                display_title=title,
+                display_title=website_display_title(title),
                 paragraphs=paragraphs,
                 category=category,
                 category_order=category_order,
@@ -838,12 +846,56 @@ TEX_ESCAPES = {
 }
 SYMBOL_FALLBACK_CHARACTERS = set("①②③④")
 CJK_FALLBACK_CHARACTERS = set("ǎǔ")
+CJK_CLOSING_PUNCTUATION = set("》」』】）〕］〉”’")
+CJK_FOLLOWING_PUNCTUATION = set("，。；：！？、")
 
 
-def escape_tex(text: str) -> str:
+def website_latin_quote_indices(text: str) -> set[int]:
+    indices: set[int] = set()
+    search_from = 0
+    while True:
+        opener = text.find("“", search_from)
+        if opener < 0:
+            return indices
+
+        terminators = [
+            index
+            for index in (text.find("”", opener + 1), text.find('"', opener + 1))
+            if index >= 0
+        ]
+        if not terminators:
+            return indices
+
+        closer = min(terminators)
+        quoted = text[opener + 1 : closer]
+        has_latin = any(character.isascii() and character.isalpha() for character in quoted)
+        has_han = any("\u3400" <= character <= "\u9fff" for character in quoted)
+        if has_latin and not has_han:
+            indices.add(opener)
+            if text[closer] == "”":
+                indices.add(closer)
+        search_from = closer + 1
+
+
+def escape_tex(text: str, latin_quote_indices: Optional[set[int]] = None) -> str:
     result: List[str] = []
-    for character in normalize_controls(text):
-        if character == "・":
+    normalized = normalize_controls(text)
+    latin_quote_indices = latin_quote_indices or set()
+    for index, character in enumerate(normalized):
+        if (
+            index > 0
+            and normalized[index - 1] in CJK_CLOSING_PUNCTUATION
+            and character in CJK_FOLLOWING_PUNCTUATION
+        ):
+            result.append(r"\CJKPunctuationPairGap{}")
+
+        if character == "“" and index in latin_quote_indices:
+            result.append(r"\LatinLeftDoubleQuote{}")
+        elif character == "”" and index in latin_quote_indices:
+            result.append(r"\LatinRightDoubleQuote{}")
+        elif character == "’":
+            result.append(r"\LatinApostrophe{}")
+        elif character == "・":
             result.append("·")
         elif character in SYMBOL_FALLBACK_CHARACTERS:
             result.append(rf"{{\BlissSymbols {character}}}")
@@ -882,8 +934,19 @@ def escape_tex_url(url: str) -> str:
     return "".join(replacements.get(character, character) for character in url)
 
 
-def render_span(span: Span) -> str:
-    text = escape_tex(span.text)
+def render_span(
+    span: Span,
+    latin_quote_indices: Optional[set[int]] = None,
+    infer_website_smart_quotes: bool = False,
+) -> str:
+    quote_indices = set(latin_quote_indices or ())
+    if span.character_style == "Apostrophe":
+        quote_indices.update(
+            index
+            for index, character in enumerate(normalize_controls(span.text))
+            if character in "“”"
+        )
+    text = escape_tex(span.text, quote_indices)
     if span.character_style in {"English Bold", "Book Title", "Markdown Bold"}:
         return rf"\textbf{{{text}}}"
     if span.character_style == "Markdown Code":
@@ -896,13 +959,52 @@ def render_span(span: Span) -> str:
         note_spans = parse_markdown_inline(
             span.text, {}, Path("footnote"), 0
         )
-        note = "".join(render_span(note_span) for note_span in note_spans)
+        note = render_spans(note_spans, infer_website_smart_quotes)
         return rf"\footnote{{{note}}}"
     return text
 
 
-def render_paragraph(paragraph: Paragraph) -> str:
-    content = "".join(render_span(span) for span in paragraph.spans)
+def render_spans(
+    spans: Sequence[Span], infer_website_smart_quotes: bool = False
+) -> str:
+    rendered: List[str] = []
+    normalized_spans = [normalize_controls(span.text) for span in spans]
+    latin_quote_indices = (
+        website_latin_quote_indices("".join(normalized_spans))
+        if infer_website_smart_quotes
+        else set()
+    )
+    previous_character = ""
+    offset = 0
+    for span, normalized in zip(spans, normalized_spans):
+        if (
+            previous_character in CJK_CLOSING_PUNCTUATION
+            and normalized
+            and normalized[0] in CJK_FOLLOWING_PUNCTUATION
+        ):
+            rendered.append(r"\CJKPunctuationPairGap{}")
+        local_quote_indices = {
+            index - offset
+            for index in latin_quote_indices
+            if offset <= index < offset + len(normalized)
+        }
+        rendered.append(
+            render_span(
+                span,
+                local_quote_indices,
+                infer_website_smart_quotes,
+            )
+        )
+        if normalized:
+            previous_character = normalized[-1]
+        offset += len(normalized)
+    return "".join(rendered)
+
+
+def render_paragraph(
+    paragraph: Paragraph, infer_website_smart_quotes: bool = False
+) -> str:
+    content = render_spans(paragraph.spans, infer_website_smart_quotes)
     attributes = dict(paragraph.attributes)
     if paragraph.style == WEBSITE_IMAGE_STYLE:
         return (
@@ -937,7 +1039,46 @@ def vertical_tex(text: str) -> str:
 
 
 def render_section_paragraphs(section: TextSection) -> List[str]:
-    return [render_paragraph(paragraph) for paragraph in section.paragraphs]
+    infer_website_smart_quotes = getattr(section, "source_kind", "") == "website"
+    return [
+        render_paragraph(paragraph, infer_website_smart_quotes)
+        for paragraph in section.paragraphs
+    ]
+
+
+def render_colophon(section: TextSection) -> str:
+    lines: List[str] = []
+    reached_unlabelled_lines = False
+
+    for paragraph in section.paragraphs:
+        text = paragraph.plain_text.rstrip()
+        fields = text.split("\t")
+
+        if len(fields) == 2 and all(fields):
+            if reached_unlabelled_lines:
+                raise ValueError("Labelled colophon row follows unlabelled text")
+            label, value = fields
+            value_tex = escape_tex(value).replace('"', r"\TextQuote{}")
+            value_tex = value_tex.replace("×", r"\CJKTimes{}")
+            value_tex = value_tex.replace("–", r"\LatinDash{}")
+            lines.append(
+                rf"\BookColophonRow{{{escape_tex(label)}}}{{{value_tex}}}"
+            )
+        elif len(fields) == 3 and not fields[0] and not fields[1] and fields[2]:
+            if reached_unlabelled_lines:
+                raise ValueError("Colophon continuation follows unlabelled text")
+            lines.append(
+                rf"\BookColophonContinuation{{{escape_tex(fields[2])}}}"
+            )
+        elif len(fields) == 1 and fields[0]:
+            if not reached_unlabelled_lines:
+                lines.append(r"\BookColophonGap{}")
+                reached_unlabelled_lines = True
+            lines.append(rf"\BookColophonText{{{escape_tex(fields[0])}}}")
+        else:
+            raise ValueError(f"Unsupported colophon row: {text!r}")
+
+    return "\n".join(lines)
 
 
 def render_content_tex(book: Book) -> str:
@@ -951,7 +1092,7 @@ def render_content_tex(book: Book) -> str:
         generated_from += f" and {website_count} website articles"
     lines = [
         f"% Generated from {generated_from}; do not edit by hand.",
-        rf"\BookColophon{{{escape_tex(book.colophon.plain_text)}}}",
+        "\\BookColophon{\n" + render_colophon(book.colophon) + "\n}",
         rf"\BookTitlePage{{{escape_tex(book.title)}}}{{{escape_tex(book.author)}}}"
         rf"{{{vertical_tex(book.title)}}}{{{vertical_tex(book.author)}}}",
         rf"\BookForeword{{{escape_tex(book.foreword.display_title)}}}",
@@ -1010,7 +1151,7 @@ def render_manifest(book: Book) -> dict:
             "cjk_body": "FZNewShuSong-Z10",
             "latin_body": "Minion Pro",
             "cjk_heading": "Hiragino Sans GB (system; FandolHei fallback)",
-            "latin_heading": "TeX Gyre Heros (SF Pro replacement)",
+            "latin_heading": "SF Pro Display Bold (packaged)",
         },
         "parts": [
             {

@@ -10,7 +10,12 @@ PROJECT_DIR = SOURCE_DIR.parent
 INDESIGN_DIR = PROJECT_DIR / "indesign"
 sys.path.insert(0, str(SOURCE_DIR / "scripts"))
 
-from convert_idml import extract_book, render_content_tex, render_manifest  # noqa: E402
+from convert_idml import (  # noqa: E402
+    escape_tex,
+    extract_book,
+    render_content_tex,
+    render_manifest,
+)
 
 
 class ConvertIdmlTests(unittest.TestCase):
@@ -79,6 +84,55 @@ class ConvertIdmlTests(unittest.TestCase):
         self.assertNotIn("%", generated_body.replace(r"\%", ""))
         self.assertIn(r"\%", generated_body)
 
+    def test_preserves_indesign_punctuation_spacing_and_latin_apostrophes(self) -> None:
+        self.assertEqual(
+            r"《大问题》\CJKPunctuationPairGap{}；",
+            escape_tex("《大问题》；"),
+        )
+        self.assertEqual(
+            r"「The Real Thing」\CJKPunctuationPairGap{}。",
+            escape_tex("「The Real Thing」。"),
+        )
+        self.assertEqual(
+            r"Justice: What\LatinApostrophe{}s the Right Thing To Do?",
+            escape_tex("Justice: What’s the Right Thing To Do?"),
+        )
+
+        tex = render_content_tex(self.book)
+        self.assertEqual(7, tex.count(r"\LatinLeftDoubleQuote{}"))
+        self.assertEqual(7, tex.count(r"\LatinRightDoubleQuote{}"))
+        self.assertIn(
+            r"\LatinLeftDoubleQuote{}no\LatinRightDoubleQuote{}",
+            tex,
+        )
+        self.assertIn(
+            r'“I\LatinApostrophe{}m so 馋”',
+            tex,
+        )
+        self.assertIn(
+            r'“I\LatinApostrophe{}m so hungry.”',
+            tex,
+        )
+
+    def test_renders_colophon_as_a_fixed_semantic_grid(self) -> None:
+        tex = render_content_tex(self.book)
+        colophon = tex.split(r"\BookTitlePage", 1)[0]
+
+        self.assertIn(r"\BookColophonRow{书　名}{幸　福}", colophon)
+        self.assertIn(r"\BookColophonRow{装帧设计}{王　灏}", colophon)
+        self.assertIn(
+            r"\BookColophonContinuation{2019 年 4 月多伦多第一次印刷}",
+            colophon,
+        )
+        self.assertIn(r"\BookColophonGap{}", colophon)
+        self.assertIn(
+            r'\BookColophonRow{规　格}{Tradebook 6\TextQuote{}'
+            r'\CJKTimes{}9\TextQuote{} (152 mm\CJKTimes{}229 mm)}',
+            colophon,
+        )
+        self.assertIn(r"\BookColophonRow{印　数}{1 \LatinDash{} 600 册}", colophon)
+        self.assertNotIn(r"\BookTab{}", colophon)
+
     def test_manifest_records_reference_geometry_and_fonts(self) -> None:
         manifest = render_manifest(self.book)
 
@@ -88,6 +142,9 @@ class ConvertIdmlTests(unittest.TestCase):
         self.assertEqual(8, manifest["part_count"])
         self.assertEqual("FZNewShuSong-Z10", manifest["fonts"]["cjk_body"])
         self.assertEqual("Minion Pro", manifest["fonts"]["latin_body"])
+        self.assertEqual(
+            "SF Pro Display Bold (packaged)", manifest["fonts"]["latin_heading"]
+        )
 
 
 if __name__ == "__main__":
