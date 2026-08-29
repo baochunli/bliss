@@ -18,7 +18,6 @@
 \RequirePackage{xcolor}
 \RequirePackage{hyperref}
 \RequirePackage{bookmark}
-\RequirePackage{needspace}
 
 % The live InDesign text area is 321 x 535 pt inside a 432 x 648 pt page.
 \geometry{
@@ -81,7 +80,7 @@
   bookmarksnumbered=false
 }
 
-\newcommand{\BookBodyFont}{\fontsize{11bp}{16.5bp}\selectfont}
+\newcommand{\BookBodyFont}{\fontsize{11bp}{18.7bp}\selectfont}
 \AtBeginDocument{\color{blissink}\BookBodyFont}
 \setlength{\parindent}{22bp}
 \setlength{\parskip}{5pt}
@@ -344,7 +343,7 @@
       #2}
   \end{minipage}
   \par
-  \clearpage
+  \cleardoublepage
   \ifnum\value{bookpart}=1
     \hypersetup{pageanchor=true}%
     \pagenumbering{arabic}%
@@ -352,24 +351,22 @@
 }
 
 \newcommand{\BookArticle}[2]{%
-  \par
-  % Keep the title with at least four body lines while allowing articles to
-  % follow one another on the same page.
-  \Needspace{140bp}
+  \clearpage
   \thispagestyle{blissbody}
-  \vspace*{15bp}
+  \vspace*{150bp}
   \noindent\makebox[\textwidth][c]{%
     \hspace*{2.6bp}%
     \phantomsection
     \addcontentsline{toc}{section}{#2}%
     {\BlissHeadingFont\fontsize{16bp}{21bp}\selectfont #1}
   }\par
-  \vspace{15bp}
+  \vspace{39bp}
   \BookBodyFont
 }
 
-% Retain two unnumbered closing pages without padding to an absolute page
-% number, which could conceal missing content.
+% The reference edition ends with three unnumbered blank pages.  Preserve
+% that closing cadence even when LuaTeX reflow or later articles lengthen the
+% body; padding to an absolute page number would silently lose those pages.
 \newcommand{\BookFinish}{%
   \clearpage
   \ifnum\value{page}<382
@@ -379,4 +376,10 @@
   \pagestyle{empty}%
   \thispagestyle{empty}\null\clearpage
   \thispagestyle{empty}\null\clearpage
+  \thispagestyle{empty}\null\clearpage
+  % The expanded contents can change the front-matter length.  Use the
+  % absolute shipped-page counter so the parity rule stays correct.
+  \ifodd\ReadonlyShipoutCounter
+    \thispagestyle{empty}\null\clearpage
+  \fi
 }
