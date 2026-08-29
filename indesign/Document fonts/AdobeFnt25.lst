@@ -1,0 +1,245 @@
+%!Adobe-FontList 1.25
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Invalid
+OutlineFileName:/Users/bli/Desktop/Bliss Pages Final Edition Folder/Document fonts/AdobeFnt25.lst
+FileLength:2833
+FileModTime:809686050
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:CID
+FontName:AdobeSongStd-Light
+FamilyName:Adobe Song Std
+StyleName:L
+MenuName:Adobe Song Std L
+StyleBits:0
+WeightClass:300
+WidthClass:5
+AngleClass:0
+FullName:Adobe Song Std L
+FamilyNameNative:Adobe 宋体 Std
+StyleNameNative:L
+FullNameNative:Adobe 宋体 Std L
+WritingScript:SimplifiedChinese
+OutlineFileName:/Users/bli/Desktop/Bliss Pages Final Edition Folder/Document fonts/AdobeSongStd-Light.otf
+DataFormat:sfntData
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:15589544
+FileModTime:809685592
+NameArray:0,Mac,4,Adobe Song Std L
+NameArray:25,Mac,4,Adobe 宋体 Std L
+NameArray:0,Win,1,Adobe Song Std L
+NameArray:0,Win,16,Adobe Song Std
+NameArray:25,Win,1,Adobe 宋体 Std L
+NameArray:25,Win,16,Adobe 宋体 Std
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Rearranged
+FontName:ATC-*Bliss*0020*Book*0020*Bold
+FamilyName:Bliss Book Bold
+MenuName:Bliss Book Bold
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Bliss Book Bold
+FamilyNameNative:Bliss Book Bold
+StyleNameNative:
+FullNameNative:Bliss Book Bold
+OutlineFileName:/Users/bli/Desktop/Bliss Pages Final Edition Folder/Document fonts/Bliss Book Bold
+DataFormat:sfntData
+ComponentFont:HiraginoSansGB-W6-UniGB-UTF16-H
+ComponentFont:HiraginoSansGB-W6-UniGB-UTF16-H
+ComponentFont:HiraginoSansGB-W6-UniGB-UTF16-H
+ComponentFont:HiraginoSansGB-W6-UniGB-UTF16-H
+ComponentFont:SFProDisplay-Bold-UniGB-UTF16-H
+ComponentFont:SFProDisplay-Bold-UniGB-UTF16-H
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:6323
+FileModTime:809685970
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Rearranged
+FontName:ATC-*Bliss*0020*Book*0020*Minion*0020*Pro
+FamilyName:Bliss Book Minion Pro
+MenuName:Bliss Book Minion Pro
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Bliss Book Minion Pro
+FamilyNameNative:Bliss Book Minion Pro
+StyleNameNative:
+FullNameNative:Bliss Book Minion Pro
+OutlineFileName:/Users/bli/Desktop/Bliss Pages Final Edition Folder/Document fonts/Bliss Book Minion Pro
+DataFormat:sfntData
+ComponentFont:FZXSSK--GBK1-0-UniGB-UTF16-H
+ComponentFont:FZXSSK--GBK1-0-UniGB-UTF16-H
+ComponentFont:FZXSSK--GBK1-0-UniGB-UTF16-H
+ComponentFont:FZXSSK--GBK1-0-UniGB-UTF16-H
+ComponentFont:MinionPro-Regular-UniGB-UTF16-H
+ComponentFont:MinionPro-Regular-UniGB-UTF16-H
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:6476
+FileModTime:809686617
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MinionPro-Bold
+FamilyName:Minion Pro
+StyleName:Bold
+MenuName:Minion Pro
+StyleBits:2
+WeightClass:700
+WidthClass:5
+AngleClass:0
+FullName:Minion Pro Bold
+WritingScript:Roman
+OutlineFileName:/Users/bli/Desktop/Bliss Pages Final Edition Folder/Document fonts/MinionPro-Bold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:230912
+FileModTime:619092267
+DesignSize:110
+NameArray:0,Mac,4,Minion Pro Bold
+NameArray:0,Win,1,Minion Pro
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MinionPro-Regular
+FamilyName:Minion Pro
+StyleName:Regular
+MenuName:Minion Pro
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Minion Pro
+WritingScript:Roman
+OutlineFileName:/Users/bli/Desktop/Bliss Pages Final Edition Folder/Document fonts/MinionPro-Regular.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:218640
+FileModTime:809685592
+DesignSize:110
+NameArray:0,Mac,4,Minion Pro
+NameArray:0,Win,1,Minion Pro
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:SFProDisplay-Bold
+FamilyName:SF Pro Display
+StyleName:Bold
+MenuName:SF Pro Display
+StyleBits:2
+WeightClass:700
+WidthClass:5
+AngleClass:0
+FullName:SF Pro Display Bold
+WritingScript:Roman
+OutlineFileName:/Users/bli/Desktop/Bliss Pages Final Edition Folder/Document fonts/SF-Pro-Display-Bold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:4250708
+FileModTime:713404700
+NameArray:0,Win,1,SF Pro Display
+NameArray:0,Win,16,SF Pro Display
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:FZXSSK--GBK1-0
+FamilyName:FZNewShuSong-Z10
+StyleName:Regular
+MenuName:FZNewShuSong-Z10
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:FZNewShuSong-Z10
+FamilyNameNative:方正新书宋_GBK
+StyleNameNative:Regular
+FullNameNative:方正新书宋_GBK
+WritingScript:SimplifiedChinese
+OutlineFileName:/Users/bli/Desktop/Bliss Pages Final Edition Folder/Document fonts/方正新书宋Z10.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:10629508
+FileModTime:573678422
+NameArray:0,Mac,4,FZNewShuSong-Z10
+NameArray:0,Win,1,FZNewShuSong-Z10
+NameArray:25,Win,1,方正新书宋_GBK
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:FZXSSJW--GB1-0
+FamilyName:FZNewShuSong-Z10S
+StyleName:Regular
+MenuName:FZNewShuSong-Z10S
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:FZNewShuSong-Z10S
+FamilyNameNative:方正新书宋简体
+StyleNameNative:Regular
+FullNameNative:方正新书宋简体
+WritingScript:SimplifiedChinese
+OutlineFileName:/Users/bli/Desktop/Bliss Pages Final Edition Folder/Document fonts/方正新书宋Z10S.ttf
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:3267248
+FileModTime:573678427
+NameArray:0,Mac,4,FZNewShuSong-Z10S
+NameArray:0,Win,1,FZNewShuSong-Z10S
+NameArray:25,Win,1,方正新书宋简体
+%EndFont
+

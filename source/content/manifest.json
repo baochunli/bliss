@@ -1,0 +1,993 @@
+{
+  "title": "幸福",
+  "author": "李葆春",
+  "source_idml_sha256": "194d15ebc9b5dbdfd2ae47aec977fb369df7850446e85bfc51ba6be8fc456027",
+  "page": {
+    "width_pt": 432.0,
+    "height_pt": 648.0
+  },
+  "reference_pdf_pages": 400,
+  "part_count": 8,
+  "article_count": 133,
+  "paragraph_count": 2201,
+  "character_count": 165948,
+  "fonts": {
+    "cjk_body": "FZNewShuSong-Z10",
+    "latin_body": "Minion Pro",
+    "cjk_heading": "Hiragino Sans GB (system; FandolHei fallback)",
+    "latin_heading": "TeX Gyre Heros (SF Pro replacement)"
+  },
+  "parts": [
+    {
+      "title": "幸福",
+      "articles": [
+        {
+          "order": 1,
+          "title": "房子",
+          "original_page": 1,
+          "paragraphs": 4,
+          "characters": 565
+        },
+        {
+          "order": 2,
+          "title": "幸福",
+          "original_page": 3,
+          "paragraphs": 12,
+          "characters": 1624
+        },
+        {
+          "order": 3,
+          "title": "生命",
+          "original_page": 6,
+          "paragraphs": 14,
+          "characters": 2431
+        },
+        {
+          "order": 4,
+          "title": "The Cranberries",
+          "original_page": 10,
+          "paragraphs": 6,
+          "characters": 477
+        },
+        {
+          "order": 5,
+          "title": "空中小姐",
+          "original_page": 11,
+          "paragraphs": 13,
+          "characters": 618
+        },
+        {
+          "order": 6,
+          "title": "快乐至上主义",
+          "original_page": 13,
+          "paragraphs": 12,
+          "characters": 986
+        },
+        {
+          "order": 7,
+          "title": "决斗",
+          "original_page": 15,
+          "paragraphs": 13,
+          "characters": 854
+        },
+        {
+          "order": 8,
+          "title": "Say No",
+          "original_page": 17,
+          "paragraphs": 23,
+          "characters": 1984
+        },
+        {
+          "order": 9,
+          "title": "命运",
+          "original_page": 21,
+          "paragraphs": 42,
+          "characters": 1781
+        },
+        {
+          "order": 10,
+          "title": "二十而折腾",
+          "original_page": 25,
+          "paragraphs": 30,
+          "characters": 1256
+        },
+        {
+          "order": 11,
+          "title": "信教",
+          "original_page": 28,
+          "paragraphs": 31,
+          "characters": 1971
+        },
+        {
+          "order": 12,
+          "title": "优秀",
+          "original_page": 32,
+          "paragraphs": 21,
+          "characters": 1175
+        },
+        {
+          "order": 13,
+          "title": "Institutionalized",
+          "original_page": 35,
+          "paragraphs": 40,
+          "characters": 2366
+        },
+        {
+          "order": 14,
+          "title": "优点",
+          "original_page": 40,
+          "paragraphs": 11,
+          "characters": 912
+        },
+        {
+          "order": 15,
+          "title": "完美",
+          "original_page": 42,
+          "paragraphs": 30,
+          "characters": 2408
+        },
+        {
+          "order": 16,
+          "title": "Get Busy Living",
+          "original_page": 46,
+          "paragraphs": 27,
+          "characters": 1756
+        }
+      ]
+    },
+    {
+      "title": "将爱情进行到底",
+      "articles": [
+        {
+          "order": 17,
+          "title": "结婚",
+          "original_page": 53,
+          "paragraphs": 8,
+          "characters": 1022
+        },
+        {
+          "order": 18,
+          "title": "永恒的爱情",
+          "original_page": 55,
+          "paragraphs": 6,
+          "characters": 396
+        },
+        {
+          "order": 19,
+          "title": "异国恋",
+          "original_page": 57,
+          "paragraphs": 10,
+          "characters": 960
+        },
+        {
+          "order": 20,
+          "title": "心态",
+          "original_page": 59,
+          "paragraphs": 14,
+          "characters": 856
+        },
+        {
+          "order": 21,
+          "title": "克夫",
+          "original_page": 61,
+          "paragraphs": 16,
+          "characters": 1386
+        },
+        {
+          "order": 22,
+          "title": "天下大乱",
+          "original_page": 64,
+          "paragraphs": 18,
+          "characters": 1073
+        },
+        {
+          "order": 23,
+          "title": "两难",
+          "original_page": 67,
+          "paragraphs": 16,
+          "characters": 1058
+        },
+        {
+          "order": 24,
+          "title": "表白",
+          "original_page": 69,
+          "paragraphs": 21,
+          "characters": 1236
+        },
+        {
+          "order": 25,
+          "title": "心有灵犀",
+          "original_page": 72,
+          "paragraphs": 23,
+          "characters": 1656
+        },
+        {
+          "order": 26,
+          "title": "一瞬间的爱情",
+          "original_page": 75,
+          "paragraphs": 13,
+          "characters": 689
+        },
+        {
+          "order": 27,
+          "title": "暴爱",
+          "original_page": 77,
+          "paragraphs": 34,
+          "characters": 1796
+        },
+        {
+          "order": 28,
+          "title": "三枚金针",
+          "original_page": 81,
+          "paragraphs": 27,
+          "characters": 1621
+        },
+        {
+          "order": 29,
+          "title": "处女情结",
+          "original_page": 85,
+          "paragraphs": 31,
+          "characters": 1933
+        },
+        {
+          "order": 30,
+          "title": "爱与不爱",
+          "original_page": 89,
+          "paragraphs": 33,
+          "characters": 1816
+        },
+        {
+          "order": 31,
+          "title": "多线程",
+          "original_page": 93,
+          "paragraphs": 29,
+          "characters": 1716
+        },
+        {
+          "order": 32,
+          "title": "男生的品格",
+          "original_page": 97,
+          "paragraphs": 30,
+          "characters": 1952
+        },
+        {
+          "order": 33,
+          "title": "最优停止",
+          "original_page": 101,
+          "paragraphs": 33,
+          "characters": 1944
+        },
+        {
+          "order": 34,
+          "title": "一厢情愿",
+          "original_page": 105,
+          "paragraphs": 28,
+          "characters": 1716
+        },
+        {
+          "order": 35,
+          "title": "生成对抗",
+          "original_page": 109,
+          "paragraphs": 35,
+          "characters": 1791
+        },
+        {
+          "order": 36,
+          "title": "相亲",
+          "original_page": 113,
+          "paragraphs": 28,
+          "characters": 1680
+        },
+        {
+          "order": 37,
+          "title": "怀疑",
+          "original_page": 116,
+          "paragraphs": 37,
+          "characters": 2195
+        },
+        {
+          "order": 38,
+          "title": "前女友",
+          "original_page": 120,
+          "paragraphs": 19,
+          "characters": 1231
+        },
+        {
+          "order": 39,
+          "title": "罗马假日",
+          "original_page": 123,
+          "paragraphs": 27,
+          "characters": 1492
+        },
+        {
+          "order": 40,
+          "title": "分手",
+          "original_page": 126,
+          "paragraphs": 28,
+          "characters": 1612
+        },
+        {
+          "order": 41,
+          "title": "Bittersweet",
+          "original_page": 129,
+          "paragraphs": 32,
+          "characters": 1862
+        }
+      ]
+    },
+    {
+      "title": "芳华已逝 面目全非",
+      "articles": [
+        {
+          "order": 42,
+          "title": "钢笔",
+          "original_page": 135,
+          "paragraphs": 5,
+          "characters": 761
+        },
+        {
+          "order": 43,
+          "title": "钢琴",
+          "original_page": 137,
+          "paragraphs": 6,
+          "characters": 992
+        },
+        {
+          "order": 44,
+          "title": "同学",
+          "original_page": 139,
+          "paragraphs": 11,
+          "characters": 2542
+        },
+        {
+          "order": 45,
+          "title": "语言",
+          "original_page": 143,
+          "paragraphs": 4,
+          "characters": 828
+        },
+        {
+          "order": 46,
+          "title": "早恋",
+          "original_page": 145,
+          "paragraphs": 14,
+          "characters": 987
+        },
+        {
+          "order": 47,
+          "title": "马拉松",
+          "original_page": 147,
+          "paragraphs": 9,
+          "characters": 685
+        },
+        {
+          "order": 48,
+          "title": "同事",
+          "original_page": 149,
+          "paragraphs": 13,
+          "characters": 1063
+        },
+        {
+          "order": 49,
+          "title": "成事在天",
+          "original_page": 151,
+          "paragraphs": 12,
+          "characters": 1272
+        },
+        {
+          "order": 50,
+          "title": "乡愁",
+          "original_page": 154,
+          "paragraphs": 11,
+          "characters": 1381
+        }
+      ]
+    },
+    {
+      "title": "好好学习 天天向上",
+      "articles": [
+        {
+          "order": 51,
+          "title": "看书",
+          "original_page": 159,
+          "paragraphs": 4,
+          "characters": 515
+        },
+        {
+          "order": 52,
+          "title": "我的妹妹",
+          "original_page": 160,
+          "paragraphs": 8,
+          "characters": 593
+        },
+        {
+          "order": 53,
+          "title": "大V",
+          "original_page": 162,
+          "paragraphs": 7,
+          "characters": 612
+        },
+        {
+          "order": 54,
+          "title": "虚拟现实",
+          "original_page": 164,
+          "paragraphs": 13,
+          "characters": 761
+        },
+        {
+          "order": 55,
+          "title": "演讲",
+          "original_page": 166,
+          "paragraphs": 10,
+          "characters": 809
+        },
+        {
+          "order": 56,
+          "title": "新概念",
+          "original_page": 168,
+          "paragraphs": 13,
+          "characters": 782
+        },
+        {
+          "order": 57,
+          "title": "公众号",
+          "original_page": 170,
+          "paragraphs": 12,
+          "characters": 982
+        },
+        {
+          "order": 58,
+          "title": "学英语",
+          "original_page": 172,
+          "paragraphs": 7,
+          "characters": 665
+        },
+        {
+          "order": 59,
+          "title": "逆水行舟",
+          "original_page": 174,
+          "paragraphs": 10,
+          "characters": 855
+        },
+        {
+          "order": 60,
+          "title": "写作",
+          "original_page": 176,
+          "paragraphs": 10,
+          "characters": 1128
+        },
+        {
+          "order": 61,
+          "title": "莫名其妙",
+          "original_page": 178,
+          "paragraphs": 11,
+          "characters": 954
+        },
+        {
+          "order": 62,
+          "title": "波特酒",
+          "original_page": 180,
+          "paragraphs": 13,
+          "characters": 1329
+        },
+        {
+          "order": 63,
+          "title": "编程艺术",
+          "original_page": 183,
+          "paragraphs": 14,
+          "characters": 1028
+        },
+        {
+          "order": 64,
+          "title": "逻辑思维",
+          "original_page": 185,
+          "paragraphs": 17,
+          "characters": 1403
+        },
+        {
+          "order": 65,
+          "title": "人来疯",
+          "original_page": 188,
+          "paragraphs": 13,
+          "characters": 955
+        },
+        {
+          "order": 66,
+          "title": "盲目自信",
+          "original_page": 190,
+          "paragraphs": 15,
+          "characters": 994
+        },
+        {
+          "order": 67,
+          "title": "边界",
+          "original_page": 192,
+          "paragraphs": 19,
+          "characters": 1167
+        },
+        {
+          "order": 68,
+          "title": "英语口语",
+          "original_page": 195,
+          "paragraphs": 23,
+          "characters": 1896
+        },
+        {
+          "order": 69,
+          "title": "看小说",
+          "original_page": 198,
+          "paragraphs": 32,
+          "characters": 1491
+        },
+        {
+          "order": 70,
+          "title": "捧哏",
+          "original_page": 202,
+          "paragraphs": 22,
+          "characters": 1179
+        },
+        {
+          "order": 71,
+          "title": "昙花一现",
+          "original_page": 205,
+          "paragraphs": 24,
+          "characters": 1541
+        },
+        {
+          "order": 72,
+          "title": "不懂",
+          "original_page": 209,
+          "paragraphs": 31,
+          "characters": 1160
+        },
+        {
+          "order": 73,
+          "title": "失败",
+          "original_page": 212,
+          "paragraphs": 34,
+          "characters": 1608
+        }
+      ]
+    },
+    {
+      "title": "长期共存 互相吹捧",
+      "articles": [
+        {
+          "order": 74,
+          "title": "朋友",
+          "original_page": 219,
+          "paragraphs": 4,
+          "characters": 710
+        },
+        {
+          "order": 75,
+          "title": "刘爷",
+          "original_page": 221,
+          "paragraphs": 6,
+          "characters": 1186
+        },
+        {
+          "order": 76,
+          "title": "朋友圈",
+          "original_page": 223,
+          "paragraphs": 6,
+          "characters": 392
+        },
+        {
+          "order": 77,
+          "title": "征友启事",
+          "original_page": 224,
+          "paragraphs": 10,
+          "characters": 850
+        },
+        {
+          "order": 78,
+          "title": "褚明宇",
+          "original_page": 226,
+          "paragraphs": 17,
+          "characters": 1484
+        },
+        {
+          "order": 79,
+          "title": "百家争鸣",
+          "original_page": 229,
+          "paragraphs": 18,
+          "characters": 1233
+        },
+        {
+          "order": 80,
+          "title": "下等人",
+          "original_page": 232,
+          "paragraphs": 13,
+          "characters": 903
+        }
+      ]
+    },
+    {
+      "title": "为祖国健康工作五十年",
+      "articles": [
+        {
+          "order": 81,
+          "title": "长跑",
+          "original_page": 237,
+          "paragraphs": 4,
+          "characters": 728
+        },
+        {
+          "order": 82,
+          "title": "教授",
+          "original_page": 239,
+          "paragraphs": 7,
+          "characters": 2188
+        },
+        {
+          "order": 83,
+          "title": "讲课",
+          "original_page": 242,
+          "paragraphs": 5,
+          "characters": 1264
+        },
+        {
+          "order": 84,
+          "title": "皮包公司",
+          "original_page": 245,
+          "paragraphs": 9,
+          "characters": 563
+        },
+        {
+          "order": 85,
+          "title": "专注",
+          "original_page": 247,
+          "paragraphs": 10,
+          "characters": 613
+        },
+        {
+          "order": 86,
+          "title": "大学老师",
+          "original_page": 249,
+          "paragraphs": 9,
+          "characters": 650
+        },
+        {
+          "order": 87,
+          "title": "人设",
+          "original_page": 251,
+          "paragraphs": 9,
+          "characters": 865
+        },
+        {
+          "order": 88,
+          "title": "搞研究",
+          "original_page": 253,
+          "paragraphs": 12,
+          "characters": 1149
+        },
+        {
+          "order": 89,
+          "title": "减肥",
+          "original_page": 255,
+          "paragraphs": 15,
+          "characters": 1247
+        },
+        {
+          "order": 90,
+          "title": "完美主义",
+          "original_page": 258,
+          "paragraphs": 13,
+          "characters": 1025
+        },
+        {
+          "order": 91,
+          "title": "码农",
+          "original_page": 260,
+          "paragraphs": 14,
+          "characters": 1384
+        },
+        {
+          "order": 92,
+          "title": "工程师",
+          "original_page": 263,
+          "paragraphs": 14,
+          "characters": 933
+        },
+        {
+          "order": 93,
+          "title": "Gambit",
+          "original_page": 265,
+          "paragraphs": 11,
+          "characters": 999
+        },
+        {
+          "order": 94,
+          "title": "找工作",
+          "original_page": 267,
+          "paragraphs": 15,
+          "characters": 1259
+        },
+        {
+          "order": 95,
+          "title": "自我介绍",
+          "original_page": 270,
+          "paragraphs": 8,
+          "characters": 772
+        },
+        {
+          "order": 96,
+          "title": "智能",
+          "original_page": 272,
+          "paragraphs": 17,
+          "characters": 1600
+        },
+        {
+          "order": 97,
+          "title": "胆大心细",
+          "original_page": 275,
+          "paragraphs": 12,
+          "characters": 1095
+        },
+        {
+          "order": 98,
+          "title": "华山论剑",
+          "original_page": 278,
+          "paragraphs": 27,
+          "characters": 1563
+        },
+        {
+          "order": 99,
+          "title": "领导艺术",
+          "original_page": 282,
+          "paragraphs": 29,
+          "characters": 2253
+        },
+        {
+          "order": 100,
+          "title": "工作和生活",
+          "original_page": 286,
+          "paragraphs": 22,
+          "characters": 1058
+        },
+        {
+          "order": 101,
+          "title": "前途",
+          "original_page": 289,
+          "paragraphs": 25,
+          "characters": 1585
+        }
+      ]
+    },
+    {
+      "title": "儿孙自有儿孙福",
+      "articles": [
+        {
+          "order": 102,
+          "title": "Karma",
+          "original_page": 295,
+          "paragraphs": 13,
+          "characters": 699
+        },
+        {
+          "order": 103,
+          "title": "喜欢",
+          "original_page": 297,
+          "paragraphs": 7,
+          "characters": 293
+        },
+        {
+          "order": 104,
+          "title": "馋",
+          "original_page": 298,
+          "paragraphs": 8,
+          "characters": 483
+        },
+        {
+          "order": 105,
+          "title": "五岁的幸福",
+          "original_page": 300,
+          "paragraphs": 10,
+          "characters": 535
+        },
+        {
+          "order": 106,
+          "title": "江湖",
+          "original_page": 302,
+          "paragraphs": 8,
+          "characters": 340
+        },
+        {
+          "order": 107,
+          "title": "英文名",
+          "original_page": 303,
+          "paragraphs": 17,
+          "characters": 596
+        },
+        {
+          "order": 108,
+          "title": "孩子",
+          "original_page": 305,
+          "paragraphs": 34,
+          "characters": 1771
+        }
+      ]
+    },
+    {
+      "title": "柴米油盐酱醋茶",
+      "articles": [
+        {
+          "order": 109,
+          "title": "房屋贷款和活期存款",
+          "original_page": 311,
+          "paragraphs": 8,
+          "characters": 2599
+        },
+        {
+          "order": 110,
+          "title": "三角钢琴",
+          "original_page": 315,
+          "paragraphs": 17,
+          "characters": 3601
+        },
+        {
+          "order": 111,
+          "title": "省钱",
+          "original_page": 319,
+          "paragraphs": 7,
+          "characters": 1561
+        },
+        {
+          "order": 112,
+          "title": "黄金",
+          "original_page": 322,
+          "paragraphs": 15,
+          "characters": 2012
+        },
+        {
+          "order": 113,
+          "title": "名字",
+          "original_page": 326,
+          "paragraphs": 5,
+          "characters": 588
+        },
+        {
+          "order": 114,
+          "title": "Apple Watch",
+          "original_page": 328,
+          "paragraphs": 8,
+          "characters": 1200
+        },
+        {
+          "order": 115,
+          "title": "买房",
+          "original_page": 330,
+          "paragraphs": 8,
+          "characters": 1295
+        },
+        {
+          "order": 116,
+          "title": "咪蒙",
+          "original_page": 333,
+          "paragraphs": 11,
+          "characters": 613
+        },
+        {
+          "order": 117,
+          "title": "遗嘱",
+          "original_page": 335,
+          "paragraphs": 9,
+          "characters": 726
+        },
+        {
+          "order": 118,
+          "title": "勤俭节约",
+          "original_page": 337,
+          "paragraphs": 14,
+          "characters": 819
+        },
+        {
+          "order": 119,
+          "title": "敬酒",
+          "original_page": 339,
+          "paragraphs": 9,
+          "characters": 786
+        },
+        {
+          "order": 120,
+          "title": "比特币 （一）",
+          "original_page": 341,
+          "paragraphs": 19,
+          "characters": 1560
+        },
+        {
+          "order": 121,
+          "title": "比特币 （二）",
+          "original_page": 344,
+          "paragraphs": 18,
+          "characters": 1289
+        },
+        {
+          "order": 122,
+          "title": "奢侈品",
+          "original_page": 347,
+          "paragraphs": 6,
+          "characters": 654
+        },
+        {
+          "order": 123,
+          "title": "保险",
+          "original_page": 349,
+          "paragraphs": 16,
+          "characters": 1351
+        },
+        {
+          "order": 124,
+          "title": "投资",
+          "original_page": 352,
+          "paragraphs": 20,
+          "characters": 1771
+        },
+        {
+          "order": 125,
+          "title": "雷克萨斯",
+          "original_page": 355,
+          "paragraphs": 9,
+          "characters": 971
+        },
+        {
+          "order": 126,
+          "title": "城市",
+          "original_page": 357,
+          "paragraphs": 9,
+          "characters": 986
+        },
+        {
+          "order": 127,
+          "title": "吃",
+          "original_page": 359,
+          "paragraphs": 10,
+          "characters": 1216
+        },
+        {
+          "order": 128,
+          "title": "穷爸爸",
+          "original_page": 362,
+          "paragraphs": 26,
+          "characters": 2030
+        },
+        {
+          "order": 129,
+          "title": "赌博",
+          "original_page": 366,
+          "paragraphs": 16,
+          "characters": 1248
+        },
+        {
+          "order": 130,
+          "title": "命中注定",
+          "original_page": 369,
+          "paragraphs": 28,
+          "characters": 1037
+        },
+        {
+          "order": 131,
+          "title": "消费观念",
+          "original_page": 372,
+          "paragraphs": 28,
+          "characters": 1312
+        },
+        {
+          "order": 132,
+          "title": "预测未来",
+          "original_page": 375,
+          "paragraphs": 24,
+          "characters": 1443
+        },
+        {
+          "order": 133,
+          "title": "Too Good to be True",
+          "original_page": 378,
+          "paragraphs": 31,
+          "characters": 2241
+        }
+      ]
+    }
+  ]
+}
