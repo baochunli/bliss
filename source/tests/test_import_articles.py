@@ -59,7 +59,8 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
         self.assertEqual(
             {
                 "Blurb Paragraph": 1_193,
-                "Website Quote": 118,
+                "Website Question": 69,
+                "Website Quote": 49,
                 "Blurb Paragraph Date": 90,
                 "Blurb Subtitle": 86,
                 "Blurb Footnote": 3,
@@ -117,13 +118,42 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
         self.assertEqual(3, tex.count("\\BookImage{"))
         self.assertEqual(4, tex.count("\\footnote{"))
         self.assertEqual(5, tex.count("\\href{https://baochun.ca/"))
-        self.assertIn("\\BookQuote{", tex)
+        self.assertEqual(69, tex.count("\\BookQuestion{"))
+        self.assertEqual(49, tex.count("\\BookQuote{"))
+        self.assertIn(
+            r"\BookQuestion{想请教朋友们一个关于人生选择的问题",
+            tex,
+        )
+        self.assertIn(
+            r"\BookQuestion{背景：我是一所小学副科老师",
+            tex,
+        )
+        self.assertIn(
+            r"\BookQuote{Self-modifying code and distributed state",
+            tex,
+        )
         self.assertIn("\\BookSubtitle{", tex)
         self.assertIn("\\BlissCJKFallback", tex)
         self.assertEqual(1_027, tex.count(r"\CJKPunctuationPairGap{}"))
         self.assertEqual(116, tex.count(r"\LatinApostrophe{}"))
         self.assertEqual(14, tex.count(r"\LatinLeftDoubleQuote{}"))
         self.assertEqual(13, tex.count(r"\LatinRightDoubleQuote{}"))
+        self.assertEqual(20, tex.count(r"\LatinEmDash{}"))
+        self.assertIn(
+            r"from first principles \LatinEmDash{} over 360,000 lines",
+            tex,
+        )
+        self.assertIn(
+            r"code with its tests \LatinEmDash{} and a substantial fraction",
+            tex,
+        )
+        self.assertIn(r"I kind of\LatinEmDash{}maybe", tex)
+        self.assertIn(
+            r"extended \LatinEmDash{} not immediate \LatinEmDash{} family",
+            tex,
+        )
+        self.assertNotIn("first principles —— over", tex)
+        self.assertIn("Fable 5 —— 是不是可以直译", tex)
         self.assertIn(
             r'\LatinLeftDoubleQuote{}Connecting the Dots,"',
             tex,

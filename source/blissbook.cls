@@ -104,6 +104,7 @@
 \newcommand{\LatinApostrophe}{\ltjalchar"2019}
 \newcommand{\LatinLeftDoubleQuote}{\ltjalchar"201C}
 \newcommand{\LatinRightDoubleQuote}{\ltjalchar"201D}
+\newcommand{\LatinEmDash}{{\BlissColophonLatin\ltjalchar"2014}}
 \newcommand{\CJKPunctuationPairGap}{\kern.5em}
 \newcommand{\TextQuote}{{\BlissColophonLatin\ltjalchar34}}
 \newcommand{\CJKTimes}{{\BlissColophonCJKSymbols\ltjalchar"00D7}}
@@ -124,6 +125,7 @@
     \par\BookBodyFont\noindent\hspace{\parindent}#1\par
   \fi
 }
+\newcommand{\BookQuestion}[1]{\BookParagraph{#1}}
 \newcommand{\BookPlainParagraph}[1]{\BookParagraph{#1}}
 \newcommand{\BookLeftParagraph}[1]{%
   \global\BlissFootnoteSeriesfalse

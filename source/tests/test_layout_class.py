@@ -39,6 +39,18 @@ class BlissBookClassTests(unittest.TestCase):
         self.assertIn(r"\clubpenalty=0", paragraph)
         self.assertIn(r"\global\BlissAfterSubtitlefalse", paragraph)
 
+    def test_english_em_dash_uses_the_latin_body_font(self) -> None:
+        self.assertIn(
+            r'\newcommand{\LatinEmDash}{{\BlissColophonLatin\ltjalchar"2014}}',
+            self.class_source,
+        )
+
+    def test_reader_questions_use_body_paragraph_typography(self) -> None:
+        self.assertIn(
+            r"\newcommand{\BookQuestion}[1]{\BookParagraph{#1}}",
+            self.class_source,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

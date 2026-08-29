@@ -99,6 +99,22 @@ class ConvertIdmlTests(unittest.TestCase):
         )
 
         tex = render_content_tex(self.book)
+        self.assertEqual(10, tex.count(r"\LatinEmDash{}"))
+        self.assertIn(
+            r"one of quality \LatinEmDash{} the quality of ideas",
+            tex,
+        )
+        self.assertIn(r"Fine, thanks \LatinEmDash{} and you?", tex)
+        self.assertIn(
+            r"2. Work to learn \LatinEmDash{} don\LatinApostrophe{}t work",
+            tex,
+        )
+        self.assertIn(
+            r"「outlive him」——「If there\LatinApostrophe{}s nothing",
+            tex,
+        )
+        self.assertIn(r"15\% — 20\%", tex)
+        self.assertIn(r"5\% — 8\%", tex)
         self.assertEqual(7, tex.count(r"\LatinLeftDoubleQuote{}"))
         self.assertEqual(7, tex.count(r"\LatinRightDoubleQuote{}"))
         self.assertIn(

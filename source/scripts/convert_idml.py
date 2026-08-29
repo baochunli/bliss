@@ -31,6 +31,7 @@ FOOTNOTE_STYLES = {"Footnote", "Blurb Footnote"}
 TOC_TITLE_STYLE = "Table of Contents Title"
 TOC_ENTRY_STYLE = "Table of Contents Entries"
 WEBSITE_QUOTE_STYLE = "Website Quote"
+WEBSITE_QUESTION_STYLE = "Website Question"
 WEBSITE_IMAGE_STYLE = "Website Image"
 WEBSITE_LEFT_STYLE = "Website Left"
 WEBSITE_BASE_URL = "https://baochun.ca"
@@ -762,6 +763,22 @@ def _parse_markdown_blocks(
     return paragraphs
 
 
+def _classify_leading_website_questions(
+    paragraphs: Sequence[Paragraph],
+) -> List[Paragraph]:
+    """Give an article's leading blockquote run reader-question semantics."""
+    classified = list(paragraphs)
+    for index, paragraph in enumerate(classified):
+        if paragraph.style != WEBSITE_QUOTE_STYLE:
+            break
+        classified[index] = Paragraph(
+            style=WEBSITE_QUESTION_STYLE,
+            spans=paragraph.spans,
+            attributes=paragraph.attributes,
+        )
+    return classified
+
+
 def extract_website_articles(article_dir: Path) -> List[Article]:
     article_dir = Path(article_dir)
     if not article_dir.is_dir():
@@ -784,7 +801,9 @@ def extract_website_articles(article_dir: Path) -> List[Article]:
         year = _front_matter_list_item(front_matter, "标签")
         if not title or not year:
             raise ValueError(f"{path.name}:1: missing title or year")
-        paragraphs = _parse_markdown_blocks(body_lines, path, article_dir)
+        paragraphs = _classify_leading_website_questions(
+            _parse_markdown_blocks(body_lines, path, article_dir)
+        )
         if not paragraphs:
             raise ValueError(f"{path.name}: empty article")
         articles.append(
@@ -848,6 +867,7 @@ SYMBOL_FALLBACK_CHARACTERS = set("①②③④")
 CJK_FALLBACK_CHARACTERS = set("ǎǔ")
 CJK_CLOSING_PUNCTUATION = set("》」』】）〕］〉”’")
 CJK_FOLLOWING_PUNCTUATION = set("，。；：！？、")
+CJK_EM_DASH_BOUNDARIES = set("「」『』《》〈〉【】〔〕（）［］，。；：！？、")
 
 
 def website_latin_quote_indices(text: str) -> set[int]:
@@ -877,11 +897,67 @@ def website_latin_quote_indices(text: str) -> set[int]:
         search_from = closer + 1
 
 
-def escape_tex(text: str, latin_quote_indices: Optional[set[int]] = None) -> str:
+def english_em_dash_indices(text: str) -> Tuple[set[int], set[int]]:
+    """Find em-dash runs between English words.
+
+    Chinese typography conventionally uses two adjacent em-dash characters.
+    Source text sometimes carries that convention into English prose.  A
+    qualifying run is rendered as one Latin em dash; remaining codepoints in
+    the run are suppressed.  CJK brackets and Han characters stop the local
+    context scan so Chinese parenthetical dashes are preserved.
+    """
+    normalized = normalize_controls(text)
+    replacements: set[int] = set()
+    suppressed: set[int] = set()
+    has_latin = any(
+        character.isascii() and character.isalpha() for character in normalized
+    )
+    has_han = any("\u3400" <= character <= "\u9fff" for character in normalized)
+
+    def nearest_alphanumeric(index: int, step: int) -> Optional[str]:
+        while 0 <= index < len(normalized):
+            character = normalized[index]
+            if (
+                character in CJK_EM_DASH_BOUNDARIES
+                or "\u3400" <= character <= "\u9fff"
+            ):
+                return None
+            if character.isalnum():
+                return character
+            index += step
+        return None
+
+    for match in re.finditer(r"—+", normalized):
+        left = nearest_alphanumeric(match.start() - 1, -1)
+        right = nearest_alphanumeric(match.end(), 1)
+        between_english_words = bool(
+            left
+            and right
+            and left.isascii()
+            and left.isalpha()
+            and right.isascii()
+            and right.isalpha()
+        )
+        if (has_latin and not has_han) or between_english_words:
+            replacements.add(match.start())
+            suppressed.update(range(match.start() + 1, match.end()))
+    return replacements, suppressed
+
+
+def escape_tex(
+    text: str,
+    latin_quote_indices: Optional[set[int]] = None,
+    latin_em_dash_indices: Optional[set[int]] = None,
+    suppressed_em_dash_indices: Optional[set[int]] = None,
+) -> str:
     result: List[str] = []
     normalized = normalize_controls(text)
     latin_quote_indices = latin_quote_indices or set()
+    latin_em_dash_indices = latin_em_dash_indices or set()
+    suppressed_em_dash_indices = suppressed_em_dash_indices or set()
     for index, character in enumerate(normalized):
+        if index in suppressed_em_dash_indices:
+            continue
         if (
             index > 0
             and normalized[index - 1] in CJK_CLOSING_PUNCTUATION
@@ -895,6 +971,8 @@ def escape_tex(text: str, latin_quote_indices: Optional[set[int]] = None) -> str
             result.append(r"\LatinRightDoubleQuote{}")
         elif character == "’":
             result.append(r"\LatinApostrophe{}")
+        elif character == "—" and index in latin_em_dash_indices:
+            result.append(r"\LatinEmDash{}")
         elif character == "・":
             result.append("·")
         elif character in SYMBOL_FALLBACK_CHARACTERS:
@@ -938,6 +1016,8 @@ def render_span(
     span: Span,
     latin_quote_indices: Optional[set[int]] = None,
     infer_website_smart_quotes: bool = False,
+    latin_em_dash_indices: Optional[set[int]] = None,
+    suppressed_em_dash_indices: Optional[set[int]] = None,
 ) -> str:
     quote_indices = set(latin_quote_indices or ())
     if span.character_style == "Apostrophe":
@@ -946,7 +1026,12 @@ def render_span(
             for index, character in enumerate(normalize_controls(span.text))
             if character in "“”"
         )
-    text = escape_tex(span.text, quote_indices)
+    text = escape_tex(
+        span.text,
+        quote_indices,
+        latin_em_dash_indices,
+        suppressed_em_dash_indices,
+    )
     if span.character_style in {"English Bold", "Book Title", "Markdown Bold"}:
         return rf"\textbf{{{text}}}"
     if span.character_style == "Markdown Code":
@@ -974,6 +1059,9 @@ def render_spans(
         if infer_website_smart_quotes
         else set()
     )
+    latin_em_dash_indices, suppressed_em_dash_indices = english_em_dash_indices(
+        "".join(normalized_spans)
+    )
     previous_character = ""
     offset = 0
     for span, normalized in zip(spans, normalized_spans):
@@ -988,11 +1076,23 @@ def render_spans(
             for index in latin_quote_indices
             if offset <= index < offset + len(normalized)
         }
+        local_em_dash_indices = {
+            index - offset
+            for index in latin_em_dash_indices
+            if offset <= index < offset + len(normalized)
+        }
+        local_suppressed_em_dash_indices = {
+            index - offset
+            for index in suppressed_em_dash_indices
+            if offset <= index < offset + len(normalized)
+        }
         rendered.append(
             render_span(
                 span,
                 local_quote_indices,
                 infer_website_smart_quotes,
+                local_em_dash_indices,
+                local_suppressed_em_dash_indices,
             )
         )
         if normalized:
@@ -1011,7 +1111,9 @@ def render_paragraph(
             rf"\BookImage{{{escape_tex(attributes['path'])}}}"
             rf"{{{attributes['width']}}}{{{content}}}"
         )
-    if paragraph.style == WEBSITE_QUOTE_STYLE:
+    if paragraph.style == WEBSITE_QUESTION_STYLE:
+        command = "BookQuestion"
+    elif paragraph.style == WEBSITE_QUOTE_STYLE:
         command = "BookQuote"
     elif paragraph.style == WEBSITE_LEFT_STYLE:
         command = "BookLeftParagraph"
