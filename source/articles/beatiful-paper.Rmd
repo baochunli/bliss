@@ -1,0 +1,56 @@
+---
+title: 科技论文之美
+weight: 5033
+slug: 为祖国健康工作五十年/科技论文之美
+目录:
+  - 06为祖国健康工作五十年
+标签:
+  - 2023年
+---
+据说，有一个简单的判据可以知道自己什么时候博士快毕业了 —— 刚开始做研究的时候，论文看不懂，会觉得自己怎么这么无知；等快毕业时再看不懂，会觉得这篇论文怎么写得这么晦涩难懂，难以理解。这说明对待晦涩难懂的论文，自己的心态已经有了飞跃，开始有了一种「一览众山小」的感觉。
+
+乔布斯曾经说过，他理想中的产品，是科技和艺术的交融。我们写一篇科技论文，有没有这样一种可能，不仅通俗易懂，还能给读者一种艺术之美感呢？
+
+您一定要说，那肯定是要多看「顶会」论文啊，摘抄一些好词好句，多学习，多模仿，不就可以越写越有感觉了吗？
+
+我觉得吧，「顶会」发表的论文不一定是写得漂亮的优秀论文；而那些给人一种艺术之美感的论文，却不一定会在「顶会」发表。学习和模仿什么论文，其实大有讲究。
+
+我们来看一篇六十年前 Gale and Shapley 的经典论文 “[College Admissions and the Stability of Marriage](/images/Gale-Shapley.pdf).” 短短七页的论文，刚开场就极其直白，颇有一种「环滁皆山也」的气势：
+
+>Introduction. The problem with which we shall be concerned relates to the following typical situation: A college is considering a set of n applicants of which it can admit a quota of only q.
+
+这么简单的一句话，为什么我竟然极为赏识呢？
+
+首先，这句话开门见山，目的是要开始阐述这篇论文准备解决的是什么问题。我看过很多近来的论文，往往第一页看完，一直在介绍背景、文献和算法，却并没有真正说清楚这篇论文到底想解决什么问题。其次，这句话语言极其简单，而简单明了的语言，有助于读者轻而易举地看懂论文的思路，看完有一种豁然开朗的感觉。
+
+其实不仅仅是开场，这篇论文通篇都非常易读易懂。即使读者开始对这个研究方向不感兴趣，都会被一种简单的好奇心驱动，一点儿点儿通读全文。
+
+我们再来看看论文的结尾：
+
+>What, then, to raise the question once more, is mathematics? The answer, it appears, is that any argument which is carried out with sufficient precision is mathematical, and the reason that your friends and ours cannot understand mathematics is not because they have no head for figures, but because they are unable to achieve the degree of concentration required to follow a moderately involved sequence of inferences.
+
+您瞧，是不是有一种气势磅礴、更上一层楼的感觉？作者 —— Shapley 2012 年获得了诺贝尔经济学奖 —— 当年就告诉我们，一篇论文如同一盘围棋，只要每一步推理计算精确，表达清晰，就可以说是数学；而这样的数学很多人看不懂，并非由于数学本身多么艰深，而只不过是因为他们没有集中注意力罢了。
+
+这段似乎是与主题完全无关的结尾，提到的问题却是现在很多论文都普遍存在的。这些论文似乎包罗万象，不仅有大量的公式和证明，还有通篇的各种算法。但是如果仔细读下来，不但没有体会到艺术之美，而且还不知所云，由于算法描述忽略了一部分细节而无法复现（reproducibility）。究其原因，在于作者并没有把一步一步的推理过程和算法步骤通过数学和个例说清楚，让读者觉得云山雾罩，知其然而不知其所以然。
+
+说到这里，我们应该已经可以发现，其实科技论文之美，不是因为其中用到了什么好词好句，而是因为逻辑清晰，条理鲜明，甚至不需要作者提供源程序，仅仅依靠集中注意力通读论文本身的内容，就可以完美复现其提出的算法。这有点儿像黑白照片，虽平淡无奇，同样令人怦然心动。我们甚至可以说，一篇论文的语言越是简单，甚至简单到一位不同领域的学者都可以看懂，就越有一种令人拍案叫绝的美感，离科技与艺术的交叉路口就越近。
+
+看到这里您可能会问，写得太简单、太容易懂，那审稿人难道不会觉得论文水平太小儿科，没有内涵和新意吗？
+
+当然有这种可能。不过，如果因为怕语言过于简单而把论文写得艰深难懂，不但有点儿本末倒置，审稿人也不一定会因为看不懂而给出很高的评价，是吧？而且，我一直坚信，一篇论文真正的内在价值，并不是一两位审稿人的负面评价就可以改变的。我们写论文，不是为审稿人而写，而是为将来的读者写的。
+
+What, then, to raise the question once more, is a beautiful paper?
+
+如果一篇科技论文设计新颖，巧夺天工，算法步骤清晰，可以直接复现，开场和结论简洁明快，就是一篇「美」的论文。但凡美的事物，都让人有一种流连忘返的感觉，像一场精彩绝伦的电影，看完一遍，还想再看第二遍。只不过与电影艺术不同，论文的美在于它开门见山式的简单，在于它步步为营式的精密，洗尽铅华，是一种超凡脱俗的美。
+
+这样的论文，即使没有被「顶会」录用，那又何妨？
+
+如果博士快毕业了，咱们还可以说，这些注意力无法集中的审稿人，水平也未免太低啦。
+
+就如同 Gale and Shapley 大作中的最后一句话：
+
+For them the foregoing may serve as a useful illustration.
+
+<div align=right>
+2023 年 12 月，多伦多飞往东京的航班上
+</div>

@@ -14,10 +14,11 @@ Hiragino Sans GB W6 is loaded from the operating system when installed because
 it was referenced by InDesign but not packaged. TeX Live's Fandol Hei is the
 portable fallback.
 
-The packaged SF Pro font is deliberately not copied here. Its accompanying
-license says it may not be embedded in documents. TeX Gyre Heros, distributed
-with TeX Live, replaces it for Latin headings. A publisher with separate SF Pro
-embedding rights can change `\BlissHeadingLatin` in `blissbook.cls`.
+The packaged SF Pro font is deliberately not copied here. Apple's license text
+embedded in the font metadata restricts it to Apple-platform UI mock-ups and
+forbids this kind of documentation or artwork. TeX Gyre Heros, distributed with
+TeX Live, replaces it for Latin headings. A publisher with separate written
+permission from Apple can select SF Pro in `blissbook.cls`.
 
 These font files remain subject to their original licenses. Keeping them in
 this working source folder does not grant redistribution rights.

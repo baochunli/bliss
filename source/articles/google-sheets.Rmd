@@ -1,0 +1,38 @@
+---
+title: 一览众山小
+weight: 3023
+slug: 好好学习天天向上/一览众山小
+目录:
+  - 04好好学习天天向上
+标签:
+  - 2021年
+---
+为了更有效地管理家里的投资，最近迷上了 Google Sheets。
+
+记得八年前曾经读到过一篇博文，题目叫做《[Why Microsoft Word must Die](http://www.antipope.org/charlie/blog-static/2013/10/why-microsoft-word-must-die.html)》。读完不禁拍案称绝，写了这么一小段微博：
+
+————
+
+读完 Charlie Stross 的博文「[Why Microsoft Word must Die](http://www.antipope.org/charlie/blog-static/2013/10/why-microsoft-word-must-die.html)」，字字珠玑，感慨文字处理软件这一领域二十年来不但没有突破性的创新，还比当年 Mac OS 下的 Word 5.1 退步了很多。速度慢、功能复杂、排版困难、难用得一塌糊涂。觉得学术界的一大好处是不需要被迫用 Microsoft Word 写文章。
+
+————
+
+不知道为什么，这么多年来，我不但对 Microsoft Word 没有什么好感，更是死活学不会 Microsoft Excel。我觉得好用的工具给人的感觉是用的特别趁手，心想事成；而 Microsoft Excel 则恰恰相反，我想做的每一件超级简单的事儿 —— 比如按照某一列排序 —— 都有一种「心想而事不成」的感觉，特别别扭。每次用的时候学会的几招三脚猫的招数，到了下一次再想用又忘了。当然了，全世界其他人都会用的工具我不会用，只能说明我动手能力太差。
+
+这些年来需要处理表格的时候，我多半儿用的是 macOS 自带的 Numbers。Numbers 不仅界面漂亮，也比 Excel 好用多了，那种「心想事成」的感觉又回来了。我虽然觉得它好用，但是因为没什么其他人用，做出来的表格还是需要转换成 Excel 格式以后才能发给别人，还是不甚完美。
+
+管理家里的投资，多年来一直没有找到特别好用的工具。这几天下定决心做了一些调研，发现 Google Sheets 支持一个叫 `GOOGLEFINANCE ()` 的函数，可以直接在表格里实时更新股票市场的价格。不仅如此，简单学习了一下发现 Google Sheets 跟 Numbers 一样，用起来顺风顺水，省时省力。
+
+一旦爱上了则一发而不可收拾 —— 我花了几个小时，从头设计了一个题为「Live Portfolio Tracker」的表格，专门根据实时市场数据跟踪我所有的股票和债券投资，便于分析调整，颇有一种「会当凌绝顶，一览众山小」之感。
+
+用惯了 Google Sheets 还有个好处：下回再给别人发表格，我一定会洋洋得意地发个 Google Sheets 的链接 —— 想要 Excel? 哈哈自己转吧。
+
+<div align=center>![](/images/google-sheets.png){ width=100% }</div>
+
+[原图](/images/google-sheets.png)
+
+[Live Portfolio Tracker 示例](https://docs.google.com/spreadsheets/d/1bzKmkM6HUixKAA48pCFVEQRh645vXejmP3ToPGSdj6o/edit?usp=sharing)
+
+<div align=right>
+2021 年 3 月，香港
+</div>

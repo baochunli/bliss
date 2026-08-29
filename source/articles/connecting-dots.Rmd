@@ -1,0 +1,43 @@
+---
+title: Connecting the Dots
+weight: 5043
+slug: 为祖国健康工作五十年/Connecting-the-Dots
+目录:
+  - 06为祖国健康工作五十年
+标签:
+  - 2025年
+---
+
+几天前，我的学生 Chenghao 告诉了我一个令人振奋的大好消息 —— 他刚刚被 Meta 公司录用，职位是研究科学家 (Research Scientist)，部门竟然就是家喻户晓的 PyTorch。
+
+听到这个消息，我第一时间表示热烈祝贺之余，开玩笑说：「你要是拿到了一亿美金，能否给我分 0.1%？」
+
+和 Chenghao 共事已经五年了。五年一晃而过，他稳重可靠，以诚待人，我们成了很好的朋友。我这个人有一个缺点，从小到大脾气都不好，也跟他发过一两次脾气，他对我一直非常宽容。他写论文虽然慢一些，但是精益求精，几乎不需要怎么改动，文风像蝇头小楷，质朴无华，和我写的论文中的那种稍微有点儿飞扬跋扈的行草，相映成趣。他的动手能力，不仅仅体现在代码实现，也体现在硬件系统：我们曾热烈地讨论一个完美的 GPU 服务器的各种组装零件，最后他亲自组装了一台，木质的面板，英伟达 Founders Edition 在半透明的机箱中闪亮着 GeForce RTX 的大字，不仅仅是一台电脑，更是一个艺术品，给我的办公室增色不少。
+
+Chenghao 告诉我，这个工作机会，其实是 Meta 主动找到他的。他在联邦学习、分布式机器学习的训练和推理、同态加密等领域的突出成就，恰巧符合 Meta 对这个领域中人才的需求。当年做这些研究时，我们谁也没有想到，这些工作不是所谓的「灌水」，不是简历中的几个统计数字，而是有含金量有自己独特风格的作品。也许正是这些似乎不会有人真的去关注的作品，让他在繁星满天的人才市场中一枝独秀，脱颖而出。
+
+我想到这些，挥毫一蹴而就，给全组学生发了一封邮件。邮件全文如下：
+
+>Dear all,
+>
+>I am more than thrilled to share with you the fantastic news that Chenghao has just accepted an offer for a Research Scientist position at Meta, and will be joining the PyTorch distributed training team this Fall!
+>
+>As some of you know, Chenghao is not only a brilliant researcher in the group with several high-quality papers published, but also a very nice person, generous on spending his own time working for everyone in the group. He has been my #1 trusted hands for fixing both software and hardware issues in the lab, and worked tirelessly to keep both boston and sim working in their top shape. In fact, he hand-assembled boston completely from components, a feat that I can hardly achieve myself and perhaps very few can. Just recently, he helped me upgrade sim to the latest Ubuntu OS version, which may take hours, or even days, of work and was not a small feat.
+>
+>Chenghao told me that his research experience in the group matched perfectly with what the team at Meta is currently doing. They wanted to use some federated learning techniques to do cross-datacenter training, which is essentially what Chenghao has been working on. This reminded me of Steve Jobs' 2005 commencement address at Stanford University, when he shared three stories. The first story, “Connecting the Dots," fits his story to the letter: at the time of doing the work, no one expected that his research would land him one of the best jobs in North America, but eventually all stars lined up and everything worked out well.
+>
+>With this, I offer my warmest congratulations to Chenghao, and I wish him the best in his future career. I will miss all the late-night hardware testing he performed on sim and boston in BA 4176, as well as his clean, well-crafted code in Plato. But I will find solace in knowing that he is working in his dream job, advancing ML infrastructure for the world to use.
+>
+>Thank you, Chenghao, and I wish you Godspeed.
+>
+>Best regards,<br>
+>Baochun<br>
+>——<br>
+>Baochun Li, Professor<br>
+>Associate Chair, Research<br>
+>Department of Electrical and Computer Engineering<br>
+>University of Toronto<br>
+
+<div align=right>
+2025 年 7 月，香港
+</div>

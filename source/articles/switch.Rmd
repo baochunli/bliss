@@ -1,0 +1,36 @@
+---
+title: 开关
+weight: 5028
+slug: 为祖国健康工作五十年/开关
+目录:
+  - 06为祖国健康工作五十年
+标签:
+  - 2021年
+---
+今天一大早起来，走路去一家牙医专科诊所拔牙。
+
+正常的拔牙其实比较简单，普通牙医就可以做。我这颗牙算是个反常的例外，我自己的牙医对着 X 光片看了半响，说离鼻腔实在太近，还是专科医生比较保险。我于是上周约了门诊去专科医生咨询。他看了看，说只要答应他拔牙以前八小时不吃东西，前两小时不喝水，「then it’s going to be a walk in the park.」我问他会疼吗？他笑着说：「Is a walk in the park painful?」
+
+后来跟护士聊了一会儿才明白，医生说的是要静脉点滴全身麻醉。护士说，这是一种介于局部麻醉和全身麻醉之间的麻醉方式，麻醉过程中还可以下意识地听医生和护士的指示行动。比如护士要是说「把头向左转一点儿」，人就会下意识地转头。
+
+我听着像天方夜谭，觉得好神奇啊。不过万一英文听力不过关，下意识里听不懂英文，就不知道会怎样了。
+
+今早在诊所帮我准备静脉点滴的是另外一位护士。她一边给我胸前加入几个测心率的传感器，一边夸我心率低，问我是不是经常运动。我开心地说是啊，每天早上跑步。然后跟她聊了几句，夸她的仪器真先进。她说这些仪器先进啥，你还没去过 ICU 呢 —— 接着给我讲她在 ICU 帮医生装心率调节器（PaceMaker）的经历。讲了几句她说：「我一会儿开始给你加一点儿药量。」
+
+这是我现在记得的最后一句话。
+
+醒来时已经在休息室了，医生没有见到，护士也不见了。我回家吃了止疼药想，与其说是「walk in the park」，不如说是「sleep in the park」，醒来时没有梦。
+
+不过如果后来一直没有醒来呢？
+
+乔布斯的传记作者 Walter Issacson 为了写这本传记，多次采访了乔布斯。Issacson 还记得最后的一段采访：
+
+>I remember sitting in his backyard in his garden one day and he started talking about God. He said, “Sometimes I believe in God, sometimes I don't. I think it's 50-50 maybe. But ever since I've had cancer, I've been thinking about it more. And I find myself believing a bit more. I kind of—maybe it's ’cause I want to believe in an afterlife. That when you die, it doesn't just all disappear. The wisdom you've accumulated. Somehow it lives on, but sometimes I think it's just like an on-off switch. Click and you're gone.” He said—paused again, and he said, “And that's why I don't like putting on-off switches on Apple devices.”
+
+Click—and you are gone.
+
+还好，我今天只是重启了一下，不是关机。
+
+<div align=right>
+2021 年 10 月，多伦多
+</div>

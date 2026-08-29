@@ -13,7 +13,9 @@
 \RequirePackage{fontspec}
 \RequirePackage{geometry}
 \RequirePackage{fancyhdr}
+\RequirePackage{graphicx}
 \RequirePackage{multicol}
+\RequirePackage{xcolor}
 \RequirePackage{hyperref}
 \RequirePackage{bookmark}
 
@@ -23,11 +25,11 @@
   paperheight=648bp,
   inner=69bp,
   outer=42bp,
-  top=47bp,
+  top=43bp,
   bottom=66bp,
   headheight=0bp,
   headsep=0bp,
-  footskip=29bp
+  footskip=25bp
 }
 
 \defaultfontfeatures{Ligatures=TeX}
@@ -40,8 +42,12 @@
   BoldFont=FZNewShuSong-Z10.ttf,
   BoldFeatures={FakeBold=2}
 ]
+\setCJKmonofont{FZNewShuSong-Z10.ttf}[Path=fonts/]
 \setCJKfamilyfont{blisstitlebyline}{FZNewShuSong-Z10S.ttf}[Path=fonts/]
 \newfontfamily\BlissSymbols{AdobeSongStd-Light.otf}[Path=fonts/]
+% Minion Pro lacks a few Latin Extended tone-mark glyphs used in pinyin.
+% TeX Gyre Termes keeps those fallbacks at a normal Latin width.
+\newfontfamily\BlissCJKFallback{texgyretermes-regular.otf}
 \newcommand{\BlissTitleBylineFont}{\CJKfamily{blisstitlebyline}}
 
 % Hiragino is used by the InDesign edition but was not included by Package.
@@ -56,6 +62,9 @@
   \CJKfamily{blissheading}\BlissHeadingLatin
 }
 
+% InDesign's process-black text swatch is 35/31/32 RGB, not device black.
+\definecolor{blissink}{HTML}{231F20}
+
 \hypersetup{
   unicode=true,
   pdftitle={幸福},
@@ -65,7 +74,7 @@
 }
 
 \newcommand{\BookBodyFont}{\fontsize{11bp}{18.7bp}\selectfont}
-\AtBeginDocument{\BookBodyFont}
+\AtBeginDocument{\color{blissink}\BookBodyFont}
 \setlength{\parindent}{22bp}
 \setlength{\parskip}{5pt}
 \setlength{\columnsep}{22pt}
@@ -77,7 +86,7 @@
 
 \fancypagestyle{blissbody}{%
   \fancyhf{}
-  \fancyfoot[C]{\fontsize{8bp}{9bp}\selectfont\thepage}
+  \fancyfoot[LE,RO]{\fontsize{10bp}{11bp}\selectfont\thepage}
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
 }
@@ -85,20 +94,59 @@
 
 \newcommand{\BookLineBreak}{\linebreak}
 \newcommand{\BookTab}{\hspace{1em}}
+\newcommand{\BlissCryingEmoji}{（哭）}
+\newif\ifBlissFootnoteSeries
 
 \newcommand{\BookParagraph}[1]{%
+  \global\BlissFootnoteSeriesfalse
   \par\BookBodyFont\noindent\hspace{\parindent}#1\par
 }
 \newcommand{\BookPlainParagraph}[1]{\BookParagraph{#1}}
+\newcommand{\BookLeftParagraph}[1]{%
+  \global\BlissFootnoteSeriesfalse
+  \par\BookBodyFont\noindent #1\par
+}
+\newcommand{\BookQuote}[1]{%
+  \global\BlissFootnoteSeriesfalse
+  \par\vspace{5bp}
+  \begingroup
+    \leftskip=22bp
+    \rightskip=22bp
+    \parindent=0pt
+    \fontsize{10bp}{17bp}\selectfont #1\par
+  \endgroup
+  \vspace{5bp}
+}
+\newcommand{\BookImage}[3]{%
+  \global\BlissFootnoteSeriesfalse
+  % A full-width figure needs room for its following source/date lines; moving
+  % it to a fresh page avoids leaving those lines orphaned on an empty page.
+  \ifdim#2\linewidth>.9\linewidth\clearpage\fi
+  \par\vspace{7bp}
+  \begin{center}
+    \includegraphics[width=#2\linewidth,height=.9\textheight,keepaspectratio]{#1}%
+  \end{center}
+  \vspace{7bp}
+}
 \newcommand{\BookDate}[1]{%
+  \global\BlissFootnoteSeriesfalse
   \par\vspace{7bp}\noindent\hfill\BookBodyFont #1\par
 }
 \newcommand{\BookSubtitle}[1]{%
+  \global\BlissFootnoteSeriesfalse
   \par\vspace{14bp}\noindent
-  {\BlissHeadingFont\fontsize{11bp}{18.7bp}\selectfont #1}\par\vspace{7bp}
+  \makebox[\textwidth][c]{%
+    \BlissHeadingFont\fontsize{11bp}{18.7bp}\selectfont #1}%
+  \par\vspace{7bp}
 }
 \newcommand{\BookFootnote}[1]{%
-  \par\vspace{5bp}\noindent\fontsize{9bp}{14bp}\selectfont #1\par
+  \par
+  \ifBlissFootnoteSeries
+    \vspace{5bp}%
+  \else
+    \vspace{18bp}\global\BlissFootnoteSeriestrue
+  \fi
+  \noindent\fontsize{11bp}{14bp}\selectfont #1\par
   \BookBodyFont
 }
 
@@ -107,29 +155,40 @@
   \pagenumbering{gobble}
   \thispagestyle{empty}\null\clearpage
   \thispagestyle{empty}
-  \vspace*{72bp}
-  \noindent\hspace*{12bp}%
-  \begin{minipage}{285bp}
-    \fontsize{7.2bp}{11.5bp}\selectfont\raggedright #1
-  \end{minipage}
+  \vspace*{224bp}
+  \noindent\hspace*{11bp}%
+  \makebox[0pt][l]{\begin{minipage}{329bp}
+    \hrule height 0.35bp
+    \vspace{14bp}
+    \begingroup
+      \fontsize{9bp}{15.5bp}\selectfont\raggedright
+      \renewcommand{\BookTab}{\hspace{2.7em}}%
+      \renewcommand{\BookLineBreak}{\\}%
+      #1
+    \endgroup
+    \vspace{4bp}
+    \hrule height 0.35bp
+  \end{minipage}}
   \clearpage
 }
 
 \newcommand{\BookTitlePage}[4]{%
   \thispagestyle{empty}
-  \vspace*{52bp}
-  \begin{center}
-    \begin{minipage}[t]{110bp}
-      \hfill
-      {\BlissHeadingFont\fontsize{26bp}{32bp}\selectfont\shortstack{#3}}
-    \end{minipage}
-    \hspace{24bp}
-    \begin{minipage}[t]{85bp}
-      \vspace{120bp}
-      \centering\BlissTitleBylineFont\fontsize{12bp}{20bp}\selectfont
-      \shortstack{#4\\著}
-    \end{minipage}
-  \end{center}
+  \vspace*{72bp}
+  \noindent\hspace*{221bp}%
+  \begin{minipage}[t]{50bp}
+    \raggedright
+    {\BlissHeadingFont\fontsize{40bp}{48bp}\selectfont
+      \let\BlissTitleBreak\\%
+      \renewcommand{\\}{\BlissTitleBreak[7bp]}%
+      #3}
+  \end{minipage}
+  \par\vspace{155bp}
+  \noindent\hspace*{32bp}%
+  \begin{minipage}[t]{40bp}
+    \centering\BlissTitleBylineFont\fontsize{20bp}{24bp}\selectfont
+    #4\\[16bp]著
+  \end{minipage}
   \clearpage
   \thispagestyle{empty}\null\clearpage
 }
@@ -137,37 +196,57 @@
 \newcommand{\BookFrontHeading}[1]{%
   \clearpage
   \thispagestyle{empty}
-  \vspace*{29bp}
-  \begin{center}
+  \vspace*{149bp}
+  \noindent\makebox[\textwidth][c]{%
+    \hspace*{2.6bp}%
     {\BlissHeadingFont\fontsize{16bp}{20bp}\selectfont #1}
-  \end{center}
-  \vspace{31bp}
+  }\par
+  \vspace{39bp}
   \BookBodyFont
 }
 \newcommand{\BookForeword}[1]{\BookFrontHeading{#1}}
-\newcommand{\BookPreface}[1]{\BookFrontHeading{#1}}
+\newcommand{\BookPreface}[1]{%
+  \addcontentsline{toc}{part}{#1}%
+  \BookFrontHeading{#1}%
+}
 
 \makeatletter
+\newif\ifBlissFirstTOCPart
+\newif\ifBlissPreviousTOCPart
 \renewcommand*\l@part[2]{%
   \addpenalty{-\@highpenalty}%
+  \ifBlissFirstTOCPart
+    \vspace{11bp}%
+    \global\BlissFirstTOCPartfalse
+  \else
+    \ifBlissPreviousTOCPart\vspace{6bp}\else\vspace{19bp}\fi
+  \fi
+  \noindent{\BlissHeadingFont\fontsize{12bp}{19.4bp}\selectfont #1\par}%
   \vspace{9bp}%
-  {\BlissHeadingFont\fontsize{12bp}{18.7bp}\selectfont #1\par}%
+  \global\BlissPreviousTOCParttrue
 }
 \renewcommand*\l@section[2]{%
-  \@dottedtocline{1}{0pt}{0pt}{#1}{#2}%
+  \begingroup
+    \raggedright
+    \noindent #1\nobreak\hfill\makebox[2.5em][r]{#2}\hspace*{7bp}\par
+  \endgroup
+  \global\BlissPreviousTOCPartfalse
 }
 \newcommand{\BookTOC}{%
   \cleardoublepage
   \thispagestyle{empty}
-  \vspace*{8bp}
+  \vspace*{11bp}
   \begin{center}
-    {\BlissHeadingFont\fontsize{16bp}{20bp}\selectfont 目\hspace{0.5em}录}
+    {\BlissHeadingFont\fontsize{16bp}{20bp}\selectfont 目\hspace{1em}录}
   \end{center}
   \vspace{17bp}
   \begingroup
+    \global\BlissFirstTOCParttrue
+    \global\BlissPreviousTOCPartfalse
     \pagestyle{empty}
     \setlength{\parskip}{0pt}
-    \fontsize{11bp}{18.7bp}\selectfont
+    \setlength{\columnsep}{43bp}
+    \fontsize{11bp}{19.4bp}\selectfont
     \begin{multicols}{2}
       \@starttoc{toc}%
     \end{multicols}
@@ -184,10 +263,46 @@
   \phantomsection
   \addcontentsline{toc}{part}{#1}
   \thispagestyle{empty}
-  \vspace*{35bp}
-  \begin{center}
-    {\BlissHeadingFont\fontsize{26bp}{34bp}\selectfont\shortstack{#2}}
-  \end{center}
+  % The eight divider frames use four placements in the InDesign edition.
+  % Keep those page-specific placements explicit: the title lengths differ
+  % enough that one fixed frame would either drift or clip the longest title.
+  \def\BlissPartTop{50bp}%
+  \def\BlissPartLeft{214.3bp}%
+  \ifcase\value{bookpart}\or
+    % 1: defaults
+  \or
+    % 2: defaults
+  \or
+    \def\BlissPartTop{46.3bp}\def\BlissPartLeft{208.3bp}%
+  \or
+    \def\BlissPartTop{46.3bp}\def\BlissPartLeft{210.3bp}%
+  \or
+    \def\BlissPartTop{24bp}\def\BlissPartLeft{211.3bp}%
+  \or
+    \def\BlissPartTop{24bp}\def\BlissPartLeft{211.7bp}%
+  \or
+    \def\BlissPartLeft{212.3bp}%
+  \or
+    \def\BlissPartTop{26bp}%
+  \fi
+  \vspace*{\BlissPartTop}
+  \noindent\hspace*{\BlissPartLeft}%
+  \begin{minipage}[t]{40bp}
+    \centering
+    {\BlissHeadingFont\fontsize{26bp}{31.15bp}\selectfont
+      \let\BlissSavedPartBreak\\%
+      \NewDocumentCommand{\BlissPartBreak}{o}{%
+        \ifnum\value{bookpart}=1
+          \BlissSavedPartBreak[31.15bp]%
+        \else
+          \IfNoValueTF{##1}
+            {\BlissSavedPartBreak}%
+            {\BlissSavedPartBreak[31.15bp]}%
+        \fi}%
+      \let\\\BlissPartBreak
+      #2}
+  \end{minipage}
+  \par
   \cleardoublepage
   \ifnum\value{bookpart}=1
     \hypersetup{pageanchor=true}%
@@ -197,20 +312,21 @@
 
 \newcommand{\BookArticle}[2]{%
   \clearpage
-  \phantomsection
-  \addcontentsline{toc}{section}{#2}
   \thispagestyle{blissbody}
-  \vspace*{133bp}
-  \begin{center}
+  \vspace*{150bp}
+  \noindent\makebox[\textwidth][c]{%
+    \hspace*{2.6bp}%
+    \phantomsection
+    \addcontentsline{toc}{section}{#2}%
     {\BlissHeadingFont\fontsize{16bp}{21bp}\selectfont #1}
-  \end{center}
-  \vspace{29bp}
+  }\par
+  \vspace{39bp}
   \BookBodyFont
 }
 
-% The reference edition reserves body pages 382--384 as end matter blanks.
-% Reflow can move the final article by a page, so pad to the same 384-page
-% body instead of relying on a fixed number of blank-page commands.
+% The reference edition ends with three unnumbered blank pages.  Preserve
+% that closing cadence even when LuaTeX reflow or later articles lengthen the
+% body; padding to an absolute page number would silently lose those pages.
 \newcommand{\BookFinish}{%
   \clearpage
   \ifnum\value{page}<382
@@ -218,7 +334,12 @@
       The extracted book may be incomplete; refusing to conceal it with padding.}%
   \fi
   \pagestyle{empty}%
-  \loop\ifnum\value{page}<385
+  \thispagestyle{empty}\null\clearpage
+  \thispagestyle{empty}\null\clearpage
+  \thispagestyle{empty}\null\clearpage
+  % The expanded contents can change the front-matter length.  Use the
+  % absolute shipped-page counter so the parity rule stays correct.
+  \ifodd\ReadonlyShipoutCounter
     \thispagestyle{empty}\null\clearpage
-  \repeat
+  \fi
 }

@@ -1,0 +1,25 @@
+---
+title: 高德纳
+weight: 3039
+slug: 好好学习天天向上/高德纳
+目录:
+  - 04好好学习天天向上
+标签:
+  - 2026年
+---
+
+前两天跟一个北大的学生面试。他问我，为什么研究组里只有六个学生？
+
+我问：「你知道Donald Knuth吗？他整个学术生涯，只毕业了28个博士研究生。」
+
+很可惜，这个学生并不知道 Donald Knuth 何许人也。
+
+闪念之间，我差点儿想给他讲一个长长的故事。讲 Knuth 教授如何花了整整十年时间，自己一个人设计和实现了 TEX 排版系统，仅仅是因为他嫌出版社出版他写的书时，排版太难看；讲他的 TEX 如何三十年前发展到 3.14159 版本之后，每升级一版就在小数点后增加一位；讲他写的算法书里，为什么要引入 MIX 汇编语言；讲他那面值 2.56 美元的支票为什么无人兑现；讲 Knuth 的那句名言：「Beware of bugs in the above code; I have only proved it correct, not tried it.」；讲我们以前的系主任，坚决只用 TEX，只因为嫌同是图灵奖得主的 Leslie Lamport 写的 LaTeX 不够纯粹；甚至想把书架上那本 Knuth 写的《Digital Typography》的书拿下来，给他讲讲里面的 METAFONT。
+
+最后终于想到，现在早已是 AI 的大时代，其实不知道这些陈年旧事儿也完全可以理解。
+
+「Sergey Brin 你知道吧？他是 Donald Knuth 的学生（Jeffrey Ullman，图灵奖得主）的学生（Héctor García-Molina，美国国家工程院院士）的学生。」
+
+<div align=right>
+2026 年 2 月，多伦多
+</div>

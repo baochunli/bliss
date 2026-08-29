@@ -1,0 +1,26 @@
+---
+title: 寓言故事
+weight: 3041
+slug: 好好学习天天向上/寓言故事
+目录:
+  - 04好好学习天天向上
+标签:
+  - 2026年
+---
+一篇写了两个月的论文，终于快写完准备提交了。本来想亲自动笔写结语 (Concluding Remarks) 的，但转念一想，说不定让 Fable 5 先写个初稿，再手工修改一下，可以节省一些时间。当然这样做有个风险：如果 Fable 5 —— 是不是可以直译为「寓言故事」 —— 写得水平不高，也许会少了我自己对着一张白纸油然而生出来的那种有感而发的感觉。抱着尝试一下也未尝不可的心态，我写了如下提示词：
+
+>Now that the experiments section is almost completed, read the entire paper again (the first four sections have finalized and frozen), and REWRITE the concluding remarks with your best possible effort. Do not repeat any previous sentences from the abstract or the introduction. Write in a lucid, convincing way, and emphasize on the originality of this entire project, which spans over 360K LOC including tests.
+
+Fable 5 沉思片刻，洋洋洒洒写了三个自然段。虽然篇幅有点长，文字竟然令人刮目相看，拍案叫绝。无奈篇幅限制，我提示它缩写成一个自然段：
+
+>Unfortunately, the concluding remarks is too long. It should have only about the same length as the abstract, say fewer than 200 words and just one paragraph (mostly due to space constraints).
+
+Fable 5 一蹴而就，全篇192字。完全没有想到，缩写后的版本，竟然比原来的版本更为惊艳，技惊四座：
+
+>Self-modifying code and distributed state are, separately, two of the oldest hazards in computing; agent workflows now demand both at once. In this paper, our answer is that one mechanism suffices for both: when the only way a running task can change its workflow is a tagged operation that a transactional store admits once and remembers forever, distribution is survived by durability and self-modification is disciplined by admission. Our theory names the invariants admission preserves, our runtime hides admission behind an ordinary await, and our measurements certify that the hiding is honest, from ten thousand injected faults without a corrupted invariant to iteration priced within one percent of its closed form. Flakes is no veneer over an existing engine: everything from the transactional store to the harness SDK was designed from first principles —— over 360,000 lines of code with its tests —— and a substantial fraction of it was planned, written, and reviewed by harnesses running on Flakes itself. A system that stays safe while its own authors are agents inside it is, we strongly believe, an existence proof for the infrastructure the agent era requires.
+
+如此大家风范的文字，我想就算我亲自动手，还真不一定写得出来。尤其是细节 —— 比如「Flakes is no veneer over an existing engine」 —— 才得以见其写作功力。就像平衡木体操的下法一样，文字的最后一句收尾也极其重要。而这篇文字的最后一句竟然是其不断强调的 agent 写成的，不禁令人扼腕 —— 时代真的不同了。
+
+<div align=right>
+2026 年 7 月，香港
+</div>
