@@ -75,7 +75,7 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
             ),
         )
 
-    def test_uses_weight_cutoffs_and_keeps_new_duplicate_title(self) -> None:
+    def test_uses_weight_cutoffs_and_disambiguates_new_title(self) -> None:
         imported_weights = {
             (article.category_order, article.weight)
             for article in self.website_articles
@@ -86,9 +86,17 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
         self.assertIn((8, 7038), imported_weights)
         self.assertNotIn((1, 16), imported_weights)
         self.assertEqual(
-            2,
+            1,
             sum(
                 article.title == "相亲"
+                for part in self.book.parts
+                for article in part.articles
+            ),
+        )
+        self.assertEqual(
+            1,
+            sum(
+                article.title == "相亲（二）"
                 for part in self.book.parts
                 for article in part.articles
             ),
@@ -112,7 +120,7 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
         ]
 
         self.assertEqual(222, tex.count("\\BookArticle{"))
-        self.assertEqual(27, len(two_character_chinese_titles))
+        self.assertEqual(26, len(two_character_chinese_titles))
         for title in two_character_chinese_titles:
             spaced_title = "\u3000".join(title)
             self.assertIn(f"\\BookArticle{{{spaced_title}}}{{{title}}}", tex)
@@ -120,6 +128,7 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
             r"\BookArticle{《生活不是掷骰子》序言}{《生活不是掷骰子》序言}",
             tex,
         )
+        self.assertIn(r"\BookArticle{相亲（二）}{相亲（二）}", tex)
         self.assertNotIn("《生活不是掷骰子：理性决策的贝叶斯思维》序言", tex)
         self.assertEqual(1, tex.count("\\BookImage{"))
         self.assertNotIn("images/google-sheets.png", tex)
