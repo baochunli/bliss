@@ -868,6 +868,48 @@ CJK_FALLBACK_CHARACTERS = set("ǎǔ")
 CJK_CLOSING_PUNCTUATION = set("》」』】）〕］〉”’")
 CJK_FOLLOWING_PUNCTUATION = set("，。；：！？、")
 CJK_EM_DASH_BOUNDARIES = set("「」『』《》〈〉【】〔〕（）［］，。；：！？、")
+EM_DASH_SPACING = re.compile(r"[ \t\u00a0\u3000]*(—+)[ \t\u00a0\u3000]*")
+
+
+def normalize_em_dash_spacing(spans: Sequence[Span]) -> List[str]:
+    """Give every em-dash run one ordinary space on each side.
+
+    The normalization happens at render time so extracted source text and its
+    audit metadata remain unchanged.  Tracking each character's source span
+    also keeps inline Markdown and IDML character styles intact when a dash is
+    adjacent to a style boundary.
+    """
+    texts = [normalize_controls(span.text) for span in spans]
+    characters = [
+        (character, span_index)
+        for span_index, text in enumerate(texts)
+        for character in text
+    ]
+    plain_text = "".join(character for character, _ in characters)
+    if "—" not in plain_text:
+        return texts
+
+    normalized: List[List[str]] = [[] for _ in spans]
+
+    def append_range(start: int, end: int) -> None:
+        for character, span_index in characters[start:end]:
+            normalized[span_index].append(character)
+
+    position = 0
+    previous_match_end: Optional[int] = None
+    for match in EM_DASH_SPACING.finditer(plain_text):
+        append_range(position, match.start())
+        dash_start, dash_end = match.span(1)
+        first_dash_span = characters[dash_start][1]
+        last_dash_span = characters[dash_end - 1][1]
+        if match.start() != previous_match_end:
+            normalized[first_dash_span].append(" ")
+        append_range(dash_start, dash_end)
+        normalized[last_dash_span].append(" ")
+        position = match.end()
+        previous_match_end = match.end()
+    append_range(position, len(characters))
+    return ["".join(text) for text in normalized]
 
 
 def website_latin_quote_indices(text: str) -> set[int]:
@@ -1055,7 +1097,7 @@ def render_spans(
     spans: Sequence[Span], infer_website_smart_quotes: bool = False
 ) -> str:
     rendered: List[str] = []
-    normalized_spans = [normalize_controls(span.text) for span in spans]
+    normalized_spans = normalize_em_dash_spacing(spans)
     latin_quote_indices = (
         website_latin_quote_indices("".join(normalized_spans))
         if infer_website_smart_quotes
@@ -1090,7 +1132,7 @@ def render_spans(
         }
         rendered.append(
             render_span(
-                span,
+                Span(normalized, span.character_style, span.target),
                 local_quote_indices,
                 infer_website_smart_quotes,
                 local_em_dash_indices,
@@ -1101,6 +1143,10 @@ def render_spans(
             previous_character = normalized[-1]
         offset += len(normalized)
     return "".join(rendered)
+
+
+def render_text(text: str) -> str:
+    return render_spans((Span(text),))
 
 
 def render_paragraph(
@@ -1169,23 +1215,23 @@ def render_colophon(section: TextSection) -> str:
             if reached_unlabelled_lines:
                 raise ValueError("Labelled colophon row follows unlabelled text")
             label, value = fields
-            value_tex = escape_tex(value).replace('"', r"\TextQuote{}")
+            value_tex = render_text(value).replace('"', r"\TextQuote{}")
             value_tex = value_tex.replace("×", r"\CJKTimes{}")
             value_tex = value_tex.replace("–", r"\LatinDash{}")
             lines.append(
-                rf"\BookColophonRow{{{escape_tex(label)}}}{{{value_tex}}}"
+                rf"\BookColophonRow{{{render_text(label)}}}{{{value_tex}}}"
             )
         elif len(fields) == 3 and not fields[0] and not fields[1] and fields[2]:
             if reached_unlabelled_lines:
                 raise ValueError("Colophon continuation follows unlabelled text")
             lines.append(
-                rf"\BookColophonContinuation{{{escape_tex(fields[2])}}}"
+                rf"\BookColophonContinuation{{{render_text(fields[2])}}}"
             )
         elif len(fields) == 1 and fields[0]:
             if not reached_unlabelled_lines:
                 lines.append(r"\BookColophonGap{}")
                 reached_unlabelled_lines = True
-            lines.append(rf"\BookColophonText{{{escape_tex(fields[0])}}}")
+            lines.append(rf"\BookColophonText{{{render_text(fields[0])}}}")
         else:
             raise ValueError(f"Unsupported colophon row: {text!r}")
 
@@ -1204,24 +1250,24 @@ def render_content_tex(book: Book) -> str:
     lines = [
         f"% Generated from {generated_from}; do not edit by hand.",
         "\\BookColophon{\n" + render_colophon(book.colophon) + "\n}",
-        rf"\BookTitlePage{{{escape_tex(book.title)}}}{{{escape_tex(book.author)}}}"
+        rf"\BookTitlePage{{{render_text(book.title)}}}{{{render_text(book.author)}}}"
         rf"{{{vertical_tex(book.title)}}}{{{vertical_tex(book.author)}}}",
-        rf"\BookForeword{{{escape_tex(book.foreword.display_title)}}}",
+        rf"\BookForeword{{{render_text(book.foreword.display_title)}}}",
         *render_section_paragraphs(book.foreword),
         r"\BookTOC",
-        rf"\BookPreface{{{escape_tex(book.preface.display_title)}}}",
+        rf"\BookPreface{{{render_text(book.preface.display_title)}}}",
         *render_section_paragraphs(book.preface),
     ]
 
     for part in book.parts:
         lines.append(
-            rf"\BookPart{{{escape_tex(part.title)}}}"
+            rf"\BookPart{{{render_text(part.title)}}}"
             rf"{{{vertical_tex(part.title)}}}"
         )
         for article in part.articles:
             lines.append(
-                rf"\BookArticle{{{escape_tex(article.display_title)}}}"
-                rf"{{{escape_tex(article.title)}}}"
+                rf"\BookArticle{{{render_text(article.display_title)}}}"
+                rf"{{{render_text(article.title)}}}"
             )
             lines.extend(render_section_paragraphs(article))
 
