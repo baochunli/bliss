@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import sys
 import unittest
 from pathlib import Path
@@ -11,10 +12,12 @@ INDESIGN_DIR = PROJECT_DIR / "indesign"
 sys.path.insert(0, str(SOURCE_DIR / "scripts"))
 
 from convert_idml import (  # noqa: E402
+    Span,
     escape_tex,
     extract_book,
     render_content_tex,
     render_manifest,
+    render_spans,
 )
 
 
@@ -110,7 +113,7 @@ class ConvertIdmlTests(unittest.TestCase):
             tex,
         )
         self.assertIn(
-            r"「outlive him」——「If there\LatinApostrophe{}s nothing",
+            r"「outlive him」 —— 「If there\LatinApostrophe{}s nothing",
             tex,
         )
         self.assertIn(r"15\% — 20\%", tex)
@@ -127,6 +130,41 @@ class ConvertIdmlTests(unittest.TestCase):
         )
         self.assertIn(
             r'“I\LatinApostrophe{}m so hungry.”',
+            tex,
+        )
+
+    def test_normalizes_em_dash_spacing_across_languages_and_styles(self) -> None:
+        self.assertEqual("前 —— 后", render_spans((Span("前——后"),)))
+        self.assertEqual("前 —— 后", render_spans((Span("前 ——后"),)))
+        self.assertEqual("前 —— 后", render_spans((Span("前—— 后"),)))
+        self.assertEqual("前 —— 后", render_spans((Span("前 —— 后"),)))
+        self.assertEqual("前 —— —— 后", render_spans((Span("前—— ——后"),)))
+        self.assertEqual(
+            r"before \LatinEmDash{} after",
+            render_spans((Span("before—after"),)),
+        )
+        self.assertEqual(
+            r"前\textbf{ —— }后",
+            render_spans(
+                (
+                    Span("前 "),
+                    Span("——", "Markdown Bold"),
+                    Span(" 后"),
+                )
+            ),
+        )
+        self.assertEqual(" —— ", render_spans((Span("——"),)))
+
+    def test_normalizes_em_dash_spacing_in_article_titles(self) -> None:
+        book = copy.deepcopy(self.book)
+        article = book.parts[0].articles[0]
+        article.title = "Before—After"
+        article.display_title = "前——后"
+
+        tex = render_content_tex(book)
+
+        self.assertIn(
+            r"\BookArticle{前 —— 后}{Before \LatinEmDash{} After}",
             tex,
         )
 

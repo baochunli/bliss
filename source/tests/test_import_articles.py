@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import sys
 import tempfile
 import unittest
@@ -166,7 +167,7 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
             r"code with its tests \LatinEmDash{} and a substantial fraction",
             tex,
         )
-        self.assertIn(r"I kind of\LatinEmDash{}maybe", tex)
+        self.assertIn(r"I kind of \LatinEmDash{} maybe", tex)
         self.assertIn(
             r"extended \LatinEmDash{} not immediate \LatinEmDash{} family",
             tex,
@@ -184,6 +185,19 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
         self.assertNotIn("<div", tex)
         self.assertNotIn("[^", tex)
         self.assertNotIn("😭", tex)
+
+    def test_every_rendered_em_dash_has_exactly_one_space_on_both_sides(self) -> None:
+        tex = render_content_tex(self.book)
+        dash_runs = list(re.finditer(r"—+|\\LatinEmDash\{\}", tex))
+        horizontal_spaces = " \t\u00a0\u3000"
+
+        self.assertEqual(436, len(dash_runs))
+        for match in dash_runs:
+            with self.subTest(dash=match.group(), offset=match.start()):
+                self.assertEqual(" ", tex[match.start() - 1])
+                self.assertEqual(" ", tex[match.end()])
+                self.assertNotIn(tex[match.start() - 2], horizontal_spaces)
+                self.assertNotIn(tex[match.end() + 1], horizontal_spaces)
 
     def test_manifest_audits_every_website_source(self) -> None:
         manifest = render_manifest(self.book)
