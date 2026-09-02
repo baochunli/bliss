@@ -59,14 +59,13 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
         self.assertTrue(all(article.year for article in self.website_articles))
         self.assertEqual(
             {
-                "Blurb Paragraph": 1_192,
+                "Blurb Paragraph": 1_184,
                 "Website Question": 69,
-                "Website Quote": 49,
+                "Website Quote": 59,
                 "Blurb Paragraph Date": 90,
                 "Blurb Subtitle": 86,
                 "Blurb Footnote": 3,
                 "Website Image": 1,
-                "Website Left": 2,
             },
             Counter(
                 paragraph.style
@@ -110,6 +109,30 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
         self.assertNotIn("paper-writing.Rmd", source_names)
         self.assertNotIn("intro.Rmd", source_names)
 
+    def test_renders_mentor_english_letter_as_unindented_quotes(self) -> None:
+        article = next(
+            article
+            for article in self.website_articles
+            if article.source_path == "klara.Rmd"
+        )
+        letter_start = next(
+            index
+            for index, paragraph in enumerate(article.paragraphs)
+            if paragraph.plain_text == "May 29, 2022"
+        )
+        letter = article.paragraphs[letter_start:]
+
+        self.assertEqual(10, len(letter))
+        self.assertTrue(
+            all(paragraph.style == "Website Quote" for paragraph in letter)
+        )
+
+        tex = render_content_tex(self.book)
+        self.assertIn(r"\BookQuote{It is my great pleasure", tex)
+        self.assertIn(r"\BookQuote{Sincerely yours,}", tex)
+        self.assertNotIn(r"\BookParagraph{It is my great pleasure", tex)
+        self.assertNotIn(r"\BookParagraph{Sincerely yours,}", tex)
+
     def test_renders_supported_markdown_without_source_markup_leaks(self) -> None:
         tex = render_content_tex(self.book)
         two_character_chinese_titles = [
@@ -136,7 +159,7 @@ class ImportWebsiteArticlesTests(unittest.TestCase):
         self.assertEqual(4, tex.count("\\footnote{"))
         self.assertEqual(4, tex.count("\\href{https://baochun.ca/"))
         self.assertEqual(69, tex.count("\\BookQuestion{"))
-        self.assertEqual(49, tex.count("\\BookQuote{"))
+        self.assertEqual(59, tex.count("\\BookQuote{"))
         self.assertIn(
             r"\BookQuestion{想请教朋友们一个关于人生选择的问题",
             tex,
